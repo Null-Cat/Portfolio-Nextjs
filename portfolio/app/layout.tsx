@@ -1,6 +1,7 @@
 import { Providers } from "./providers";
 import type { Metadata } from "next";
 import "./globals.css";
+import NavbarMain from "./components/NavbarMain";
 
 export const metadata: Metadata = {
   title: "Philip White Portfolio",
@@ -23,13 +24,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <NavbarMain />
+          {children}
+        </Providers>
       </body>
     </html>
   );

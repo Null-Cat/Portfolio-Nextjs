@@ -23,6 +23,7 @@ const NavbarMain = () => {
 
   return (
     <Navbar
+      className="fixed top-0"
       isBordered
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
@@ -36,7 +37,7 @@ const NavbarMain = () => {
 
       <NavbarContent className="sm:hidden pl-3" justify="center">
         <NavbarBrand>
-          <Link href="/" className="font-bold text-inherit">
+          <Link href="/" className="text-inherit text-xl">
             Philip White
           </Link>
         </NavbarBrand>
@@ -44,13 +45,13 @@ const NavbarMain = () => {
 
       <NavbarContent className="hidden sm:flex gap-4" justify="start">
         <NavbarBrand>
-          <Link href="/" className="font-bold text-inherit">
+          <Link href="/" className="text-inherit text-xl">
             Philip White
           </Link>
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex" justify="center">
+      <NavbarContent className="hidden sm:flex pr-16" justify="center">
         <NavbarItem>
           <Link color="foreground" href="#Home">
             Home

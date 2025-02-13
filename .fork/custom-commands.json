@@ -1,0 +1,15 @@
+[
+  {
+    "version" : 1
+  },
+  {
+    "action" : {
+      "script" : "pm2 deploy production",
+      "showOutput" : false,
+      "type" : "sh",
+      "waitForExit" : true
+    },
+    "name" : "Deploy",
+    "target" : "repository"
+  }
+]

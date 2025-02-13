@@ -11,7 +11,7 @@ module.exports = {
 
       // Args for script for pm2 run forever
       // If use static website, remove it
-      args: "start",
+      args: "start -p 3333",
       // Current directory on server
       cwd: "/var/www/portfolio-nextjs/current",
       // Config out file for web errors

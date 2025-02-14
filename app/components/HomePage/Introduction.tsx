@@ -3,7 +3,7 @@ import LetterGlitch from "../ReactBits/LetterGlitch";
 
 const Introduction = () => {
   return (
-    <div style={{ height: "100vh" }}>
+    <div className="h-svh">
       <div className="relative h-full w-full">
         <LetterGlitch
           glitchSpeed={50}

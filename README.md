@@ -1,3 +1,3 @@
 # Portfolio-Nextjs
 
-![Front Page](./public/Frontpage.png)
+![Front Page](./public/OGImage.png)

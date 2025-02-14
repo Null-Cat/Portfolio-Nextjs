@@ -8,13 +8,17 @@ const Experience = () => {
   const [falmouthUniversityHasFadedIn, setFalmouthUniversityHasFadedIn] =
     useState(false);
   const falmouthUniversityDivRef = useRef<HTMLDivElement | null>(null);
-  const falmouthUniversityDivParent =
-    falmouthUniversityDivRef.current?.parentElement;
+  const falmouthUniversityDivParent = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    falmouthUniversityDivParent.current =
+      falmouthUniversityDivRef.current?.parentElement || null;
+  }, []);
   useEffect(() => {
     const falmouthUniversityOpacityCheckInterval = setInterval(() => {
       if (
-        falmouthUniversityDivParent &&
-        window.getComputedStyle(falmouthUniversityDivParent).opacity === "1"
+        falmouthUniversityDivParent.current &&
+        window.getComputedStyle(falmouthUniversityDivParent.current).opacity ===
+          "1"
       ) {
         setFalmouthUniversityHasFadedIn(true);
         clearInterval(falmouthUniversityOpacityCheckInterval);
@@ -22,7 +26,7 @@ const Experience = () => {
     }, 100);
 
     return () => clearInterval(falmouthUniversityOpacityCheckInterval);
-  }, [falmouthUniversityDivParent]);
+  }, []);
 
   return (
     <div style={{ height: "100vh" }}>
@@ -34,7 +38,7 @@ const Experience = () => {
           borderColor="#333"
           hoverFillColor="#222"
         />
-        <div className="absolute inset-0 flex flex-col flex-wrap p-4 pointer-events-none">
+        <div className="absolute inset-0 flex flex-col flex-wrap px-4 pt-20 pointer-events-none">
           <FadeContent
             className="h-fit"
             blur={true}
@@ -58,7 +62,7 @@ const Experience = () => {
               ref={falmouthUniversityDivRef}
               className={
                 "overflow-y-hidden flex items-center border border-default-100 px-2 py-4 rounded-lg overflow-hidden w-fit" +
-                (falmouthUniversityHasFadedIn === true ? " backdrop-blur" : "")
+                (falmouthUniversityHasFadedIn == true ? " backdrop-blur" : "")
               }
             >
               <div className="flex items-center space-x-4 h-fit px-1">

@@ -86,7 +86,7 @@ const Experience = () => {
                   <h2 className="sm:text-2xl text-base font-bold pointer-events-auto">
                     BA(Hons)
                   </h2>
-                  <p className="sm:text-lg text-sm text-default-700 pointer-events-auto">
+                  <p className="sm:text-lg text-sm text-default-500 pointer-events-auto">
                     Game Development: Programming
                   </p>
                 </div>

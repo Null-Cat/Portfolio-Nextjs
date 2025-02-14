@@ -73,7 +73,7 @@ const NavbarMain = () => {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#CV">
+          <Link color="foreground" href="/PhilipWhiteCVGame.pdf">
             CV
           </Link>
         </NavbarItem>

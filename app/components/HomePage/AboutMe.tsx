@@ -6,7 +6,7 @@ import { Divider, Image, Tooltip } from "@heroui/react";
 import TechnologyExperience from "./TechnologyExperience";
 import OtherTechnologyExperience from "./OtherTechnologyExperience";
 
-const Experience = () => {
+const AboutMe = () => {
   const [falmouthUniversityHasFadedIn, setFalmouthUniversityHasFadedIn] =
     useState(false);
   const falmouthUniversityDivRef = useRef<HTMLDivElement | null>(null);
@@ -49,7 +49,7 @@ const Experience = () => {
             initialOpacity={0}
           >
             <h1 className="sm:text-6xl text-4xl font-bold pointer-events-auto">
-              My Experience
+              About Me
             </h1>
           </FadeContent>
           <div className="flex flex-col items-center justify-center w-full grow">
@@ -312,4 +312,4 @@ const Experience = () => {
   );
 };
 
-export default Experience;
+export default AboutMe;

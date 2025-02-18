@@ -35,9 +35,9 @@ const NavbarMain = () => {
         />
       </NavbarContent>
 
-      <NavbarContent className="sm:hidden pl-3" justify="center">
+      <NavbarContent className="sm:hidden absolute inset-0 flex flex-col items-center pointer-events-none" justify="center">
         <NavbarBrand>
-          <Link href="/" className="text-inherit text-xl">
+          <Link href="/" className="text-inherit text-xl pointer-events-auto">
             Philip White
           </Link>
         </NavbarBrand>

@@ -187,7 +187,7 @@ const Experience = () => {
               />
             </FadeContent>
             <FadeContent
-              className="h-fit pt-3 w-full flex flex-wrap items-center justify-center gap-1"
+              className="pt-3 flex flex-wrap items-center justify-center gap-1 w-fit"
               blur={true}
               duration={1000}
               delay={1100}
@@ -197,11 +197,11 @@ const Experience = () => {
               <div
                 ref={falmouthUniversityDivRef}
                 className={
-                  "overflow-y-hidden flex items-center border border-default-100 px-2 py-4 rounded-lg overflow-hidden" +
+                  "flex items-center border border-default-100 px-2 py-4 rounded-lg" +
                   (falmouthUniversityHasFadedIn == true ? " backdrop-blur" : "")
                 }
               >
-                <div className="flex flex-wrap items-center justify-center gap-1 px-1">
+                <div className="grid grid-cols-5 items-center justify-center gap-1 px-1">
                   <OtherTechnologyExperience
                     toolTipText="Python"
                     altText="Python Logo"

@@ -64,7 +64,7 @@ const AboutMe = () => {
               <div
                 ref={falmouthUniversityDivRef}
                 className={
-                  "overflow-y-hidden flex items-center border border-default-100 px-2 py-4 rounded-lg overflow-hidden" +
+                  "flex items-center border border-default-100 px-2 py-4 rounded-lg" +
                   (falmouthUniversityHasFadedIn == true ? " backdrop-blur" : "")
                 }
               >
@@ -77,19 +77,19 @@ const AboutMe = () => {
                   />
                   <Divider className="h-10" orientation="vertical" />
                   <div className="flex flex-col">
-                    <h2 className="sm:text-3xl text-base font-bold pointer-events-auto">
+                    <h2 className="lg:text-3xl md:text-2xl text-base font-bold pointer-events-auto">
                       Falmouth University
                     </h2>
-                    <p className="sm:text-lg text-sm text-default-500 pointer-events-auto">
+                    <p className="lg:text-lg md:text-base text-sm text-default-500 pointer-events-auto">
                       2021 - 2024
                     </p>
                   </div>
                   <Divider className="h-10" orientation="vertical" />
                   <div className="flex flex-col">
-                    <h2 className="sm:text-2xl text-base font-bold pointer-events-auto">
+                    <h2 className="lg:text-2xl md:text-xl text-base font-bold pointer-events-auto">
                       BA(Hons)
                     </h2>
-                    <p className="sm:text-lg text-sm text-default-500 pointer-events-auto">
+                    <p className="lg:text-lg md:text-base text-sm text-default-500 pointer-events-auto">
                       Game Development: Programming
                     </p>
                   </div>
@@ -201,7 +201,7 @@ const AboutMe = () => {
                   (falmouthUniversityHasFadedIn == true ? " backdrop-blur" : "")
                 }
               >
-                <div className="grid grid-cols-5 items-center justify-center gap-1 px-1">
+                <div className="grid grid-cols-5 lg:flex items-center justify-center gap-1 px-1">
                   <OtherTechnologyExperience
                     toolTipText="Python"
                     altText="Python Logo"

@@ -4,7 +4,7 @@ import "./globals.css";
 import NavbarMain from "./components/NavbarMain";
 
 export const metadata: Metadata = {
-  title: "Philip White Portfolio",
+  title: "Philip White | Portfolio",
   authors: { name: "Philip White" },
   description:
     "I'm a Web & Game Developer with proficient experience in game engines such as Unreal Engine and Unity using languages such as C++ and C# as well as Web Technologies such as Node.js, Next.js, React, Docker, PM2 and Nginx. I strive to create visually compelling, sophisticated, and efficient software. I'm always learning new methods to optimize and produce more efficient code.",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://philipwhite.dev",
-    title: "Philip White Portfolio",
+    title: "Philip White | Portfolio",
     description:
       "I'm a Web & Game Developer with proficient experience in game engines such as Unreal Engine and Unity using languages such as C++ and C# as well as Web Technologies such as Node.js, Next.js, React, Docker, PM2 and Nginx. I strive to create visually compelling, sophisticated, and efficient software. I'm always learning new methods to optimize and produce more efficient code.",
     images: [

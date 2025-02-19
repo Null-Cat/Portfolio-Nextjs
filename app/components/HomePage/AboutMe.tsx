@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import FadeContent from "../ReactBits/FadeContent";
 import Squares from "../ReactBits/Squares";
-import { Divider, Image, Tooltip } from "@heroui/react";
+import { Divider, Image } from "@heroui/react";
 import TechnologyExperience from "./TechnologyExperience";
 import OtherTechnologyExperience from "./OtherTechnologyExperience";
 

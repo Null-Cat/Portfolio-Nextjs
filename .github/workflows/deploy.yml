@@ -1,4 +1,4 @@
-name: Deploy to Server
+name: Deploy to Production
 on:
   push:
     branches: [main]
@@ -12,20 +12,16 @@ jobs:
       # ... your other steps, such as running tests, etc...
       #
       - name: Set up SSH
+        shell: bash
         run: |
           mkdir -p ~/.ssh/
-          echo "$SSH_PRIVATE_KEY" > ./deploy.key
-          sudo chmod 600 ./deploy.key
-          echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-        shell: bash
-        env:
-          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
-          SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          ssh -o StrictHostKeyChecking=no -p 2222 phro@deploy.philipwhite.dev exit
 
       - name: Install PM2
         run: npm i -g pm2
 
       - name: Deploy
         run: pm2 deploy production
-        # Or alternately, put this deploy script in your package.json's scripts and run it using yarn/npm:
-        # run: yarn deploy

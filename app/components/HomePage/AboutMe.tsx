@@ -110,7 +110,7 @@ const AboutMe = () => {
                 altText="Next js Logo"
                 src="https://skillicons.dev/icons?i=nextjs"
                 text="Next.js"
-                subText="1+ Years"
+                subText="1+ Year"
               />
               <TechnologyExperience
                 transitionRef={falmouthUniversityDivRef}
@@ -118,7 +118,7 @@ const AboutMe = () => {
                 altText="React Logo"
                 src="https://skillicons.dev/icons?i=react"
                 text="React"
-                subText="1+ Years"
+                subText="1+ Year"
               />
               <TechnologyExperience
                 transitionRef={falmouthUniversityDivRef}

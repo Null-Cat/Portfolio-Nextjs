@@ -35,7 +35,10 @@ const NavbarMain = () => {
         />
       </NavbarContent>
 
-      <NavbarContent className="sm:hidden absolute inset-0 flex flex-col items-center pointer-events-none" justify="center">
+      <NavbarContent
+        className="sm:hidden absolute inset-0 flex flex-col items-center pointer-events-none"
+        justify="center"
+      >
         <NavbarBrand>
           <Link href="/" className="text-inherit text-xl pointer-events-auto">
             Philip White
@@ -51,7 +54,10 @@ const NavbarMain = () => {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex pr-16" justify="center">
+      <NavbarContent
+        className="hidden absolute inset-0 sm:flex items-center"
+        justify="center"
+      >
         <NavbarItem>
           <Link color="foreground" href="#Home">
             Home

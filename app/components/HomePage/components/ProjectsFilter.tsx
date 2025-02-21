@@ -28,7 +28,7 @@ import {
   TypeScriptSVG,
   UnitySVG,
   UnrealEngineSVG,
-} from "../SVGs";
+} from "../../SVGs";
 import { Key } from "@react-types/shared";
 
 interface ProjectTag {

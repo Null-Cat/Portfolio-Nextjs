@@ -1,7 +1,7 @@
 import React from "react";
 import Particles from "../ReactBits/Particles";
 import FadeContent from "../ReactBits/FadeContent";
-import ProjectsFilter from "./ProjectsFilter";
+import ProjectsFilter from "./components/ProjectsFilter";
 
 const Projects = () => {
   return (

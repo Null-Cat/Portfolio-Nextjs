@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import FadeContent from "../ReactBits/FadeContent";
 import Squares from "../ReactBits/Squares";
 import { Divider, Image } from "@heroui/react";
-import TechnologyExperience from "./TechnologyExperience";
-import OtherTechnologyExperience from "./OtherTechnologyExperience";
+import TechnologyExperience from "./components/TechnologyExperience";
+import OtherTechnologyExperience from "./components/OtherTechnologyExperience";
 
 const AboutMe = () => {
   const [falmouthUniversityHasFadedIn, setFalmouthUniversityHasFadedIn] =

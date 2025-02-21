@@ -13,7 +13,6 @@ const Projects = () => {
           particleSpread={11}
           speed={0.05}
           particleBaseSize={100}
-          moveParticlesOnHover={true}
           alphaParticles={true}
           cameraDistance={20}
           particleHoverFactor={0.5}

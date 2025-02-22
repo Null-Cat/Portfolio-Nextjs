@@ -40,7 +40,7 @@ const NavbarMain = () => {
         justify="center"
       >
         <NavbarBrand>
-          <Link href="/" className="text-inherit text-xl pointer-events-auto">
+          <Link href="/" className="text-inherit text-2xl pointer-events-auto">
             Philip White
           </Link>
         </NavbarBrand>
@@ -48,7 +48,7 @@ const NavbarMain = () => {
 
       <NavbarContent className="hidden sm:flex gap-4" justify="start">
         <NavbarBrand>
-          <Link href="/" className="text-inherit text-xl">
+          <Link href="/" className="text-inherit text-2xl">
             Philip White
           </Link>
         </NavbarBrand>

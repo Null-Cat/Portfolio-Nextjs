@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import FadeContent from "../ReactBits/FadeContent";
 import Squares from "../ReactBits/Squares";
 import { Divider, Image } from "@heroui/react";
-import TechnologyExperience from "./TechnologyExperience";
-import OtherTechnologyExperience from "./OtherTechnologyExperience";
+import TechnologyExperience from "./components/TechnologyExperience";
+import OtherTechnologyExperience from "./components/OtherTechnologyExperience";
 
 const AboutMe = () => {
   const [falmouthUniversityHasFadedIn, setFalmouthUniversityHasFadedIn] =
@@ -110,7 +110,7 @@ const AboutMe = () => {
                 altText="Next js Logo"
                 src="https://skillicons.dev/icons?i=nextjs"
                 text="Next.js"
-                subText="1+ Years"
+                subText="1+ Year"
               />
               <TechnologyExperience
                 transitionRef={falmouthUniversityDivRef}
@@ -118,7 +118,7 @@ const AboutMe = () => {
                 altText="React Logo"
                 src="https://skillicons.dev/icons?i=react"
                 text="React"
-                subText="1+ Years"
+                subText="1+ Year"
               />
               <TechnologyExperience
                 transitionRef={falmouthUniversityDivRef}

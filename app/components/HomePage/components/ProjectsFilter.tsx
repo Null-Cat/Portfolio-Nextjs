@@ -28,7 +28,7 @@ import {
   TypeScriptSVG,
   UnitySVG,
   UnrealEngineSVG,
-} from "../SVGs";
+} from "../../SVGs";
 import { Key } from "@react-types/shared";
 
 interface ProjectTag {
@@ -212,7 +212,7 @@ const ProjectsFilter = () => {
         </div>
       </div>
 
-      <div className="flex self-start gap-2">
+      <div className="flex flex-wrap self-start gap-2">
         {selectedTagKeys &&
           Array.from(selectedTagKeys).map((key) => (
             <Chip

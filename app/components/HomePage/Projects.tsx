@@ -9,13 +9,11 @@ const Projects = () => {
       <div className="relative h-full w-full">
         <Particles
           particleColors={["#ffffff", "#ffffff"]}
-          particleCount={500}
-          particleSpread={11}
+          particleCount={200}
+          particleSpread={10}
           speed={0.05}
           particleBaseSize={100}
           alphaParticles={true}
-          cameraDistance={20}
-          particleHoverFactor={0.5}
           sizeRandomness={2}
         />
         <div className="absolute inset-0 flex flex-col px-4 pt-20 pointer-events-none">

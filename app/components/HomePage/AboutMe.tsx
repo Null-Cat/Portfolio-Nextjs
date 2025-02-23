@@ -1,5 +1,3 @@
-"use client";
-import { useEffect, useRef, useState } from "react";
 import FadeContent from "../ReactBits/FadeContent";
 import Squares from "../ReactBits/Squares";
 import { Divider, Image } from "@heroui/react";
@@ -7,29 +5,6 @@ import TechnologyExperience from "./components/TechnologyExperience";
 import OtherTechnologyExperience from "./components/OtherTechnologyExperience";
 
 const AboutMe = () => {
-  const [falmouthUniversityHasFadedIn, setFalmouthUniversityHasFadedIn] =
-    useState(false);
-  const falmouthUniversityDivRef = useRef<HTMLDivElement | null>(null);
-  const falmouthUniversityDivParent = useRef<HTMLElement | null>(null);
-  useEffect(() => {
-    falmouthUniversityDivParent.current =
-      falmouthUniversityDivRef.current?.parentElement || null;
-  }, []);
-  useEffect(() => {
-    const falmouthUniversityOpacityCheckInterval = setInterval(() => {
-      if (
-        falmouthUniversityDivParent.current &&
-        window.getComputedStyle(falmouthUniversityDivParent.current).opacity ===
-          "1"
-      ) {
-        setFalmouthUniversityHasFadedIn(true);
-        clearInterval(falmouthUniversityOpacityCheckInterval);
-      }
-    }, 100);
-
-    return () => clearInterval(falmouthUniversityOpacityCheckInterval);
-  }, []);
-
   return (
     <div className="sm:h-svh h-[230svh]">
       <div className="relative h-full w-full">
@@ -55,19 +30,13 @@ const AboutMe = () => {
           <div className="flex flex-col items-center justify-center w-full grow">
             <FadeContent
               className="h-fit w-full flex items-center justify-center"
-              blur={true}
+              blur={false}
               duration={1000}
               delay={500}
               easing="ease-out"
               initialOpacity={0}
             >
-              <div
-                ref={falmouthUniversityDivRef}
-                className={
-                  "flex items-center border border-default-100 px-2 py-4 rounded-lg" +
-                  (falmouthUniversityHasFadedIn == true ? " backdrop-blur" : "")
-                }
-              >
+              <div className="flex items-center border border-default-100 px-2 py-4 rounded-lg backdrop-blur">
                 <div className="flex items-center space-x-4 px-1">
                   <Image
                     alt="Falmouth University Logo"
@@ -98,47 +67,37 @@ const AboutMe = () => {
             </FadeContent>
             <FadeContent
               className="h-fit pt-16 w-full flex flex-wrap items-center justify-center gap-1"
-              blur={true}
+              blur={false}
               duration={1000}
               delay={700}
               easing="ease-out"
               initialOpacity={0}
             >
               <TechnologyExperience
-                transitionRef={falmouthUniversityDivRef}
-                hasFadedInCheck={falmouthUniversityHasFadedIn}
                 altText="Next js Logo"
                 src="https://skillicons.dev/icons?i=nextjs"
                 text="Next.js"
                 subText="1+ Year"
               />
               <TechnologyExperience
-                transitionRef={falmouthUniversityDivRef}
-                hasFadedInCheck={falmouthUniversityHasFadedIn}
                 altText="React Logo"
                 src="https://skillicons.dev/icons?i=react"
                 text="React"
                 subText="1+ Year"
               />
               <TechnologyExperience
-                transitionRef={falmouthUniversityDivRef}
-                hasFadedInCheck={falmouthUniversityHasFadedIn}
                 altText="Node js Logo"
                 src="https://skillicons.dev/icons?i=nodejs"
                 text="Node.js"
                 subText="5+ Years"
               />
               <TechnologyExperience
-                transitionRef={falmouthUniversityDivRef}
-                hasFadedInCheck={falmouthUniversityHasFadedIn}
                 altText="Unreal Engine Logo"
                 src="https://skillicons.dev/icons?i=unreal"
                 text="Unreal Engine"
                 subText="3+ Years"
               />
               <TechnologyExperience
-                transitionRef={falmouthUniversityDivRef}
-                hasFadedInCheck={falmouthUniversityHasFadedIn}
                 altText="Unity Logo"
                 src="https://skillicons.dev/icons?i=unity"
                 text="Unity"
@@ -147,39 +106,31 @@ const AboutMe = () => {
             </FadeContent>
             <FadeContent
               className="h-fit pt-3 w-full flex flex-wrap items-center justify-center gap-1"
-              blur={true}
+              blur={false}
               duration={1000}
               delay={900}
               easing="ease-out"
               initialOpacity={0}
             >
               <TechnologyExperience
-                transitionRef={falmouthUniversityDivRef}
-                hasFadedInCheck={falmouthUniversityHasFadedIn}
                 altText="Java Script Logo"
                 src="https://skillicons.dev/icons?i=js"
                 text="JavaScript"
                 subText="5+ Years"
               />
               <TechnologyExperience
-                transitionRef={falmouthUniversityDivRef}
-                hasFadedInCheck={falmouthUniversityHasFadedIn}
                 altText="Type Script Logo"
                 src="https://skillicons.dev/icons?i=ts"
                 text="TypeScript"
                 subText="2+ Years"
               />
               <TechnologyExperience
-                transitionRef={falmouthUniversityDivRef}
-                hasFadedInCheck={falmouthUniversityHasFadedIn}
                 altText="C Plus Plus Logo"
                 src="https://skillicons.dev/icons?i=cpp"
                 text="C++"
                 subText="3+ Years"
               />
               <TechnologyExperience
-                transitionRef={falmouthUniversityDivRef}
-                hasFadedInCheck={falmouthUniversityHasFadedIn}
                 altText="C Sharp Logo"
                 src="https://skillicons.dev/icons?i=cs"
                 text="C#"
@@ -188,19 +139,13 @@ const AboutMe = () => {
             </FadeContent>
             <FadeContent
               className="pt-3 flex flex-wrap items-center justify-center gap-1 w-fit"
-              blur={true}
+              blur={false}
               duration={1000}
               delay={1100}
               easing="ease-out"
               initialOpacity={0}
             >
-              <div
-                ref={falmouthUniversityDivRef}
-                className={
-                  "flex items-center border border-default-100 px-2 py-4 rounded-lg" +
-                  (falmouthUniversityHasFadedIn == true ? " backdrop-blur" : "")
-                }
-              >
+              <div className="flex items-center border border-default-100 px-2 py-4 rounded-lg backdrop-blur">
                 <div className="grid grid-cols-5 lg:flex items-center justify-center gap-1 px-1">
                   <OtherTechnologyExperience
                     toolTipText="Python"

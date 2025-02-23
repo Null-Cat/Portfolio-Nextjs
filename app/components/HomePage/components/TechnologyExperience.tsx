@@ -3,8 +3,6 @@
 import { Divider, Image } from "@heroui/react";
 import { RefObject } from "react";
 interface TechnologyExperienceProps {
-  transitionRef: RefObject<HTMLDivElement | null>;
-  hasFadedInCheck: boolean;
   altText: string;
   src: string;
   text: string;
@@ -12,8 +10,6 @@ interface TechnologyExperienceProps {
 }
 
 const TechnologyExperience = ({
-  transitionRef,
-  hasFadedInCheck,
   altText,
   src,
   text,
@@ -21,11 +17,8 @@ const TechnologyExperience = ({
 }: TechnologyExperienceProps) => {
   return (
     <div
-      ref={transitionRef}
-      className={
-        "overflow-y-hidden flex flex-wrap items-center border border-default-100 p-4 rounded-lg overflow-hidden w-fit space-x-4" +
-        (hasFadedInCheck == true ? " backdrop-blur" : "")
-      }
+      className=
+        "overflow-y-hidden flex flex-wrap items-center border border-default-100 p-4 rounded-lg overflow-hidden w-fit space-x-4 backdrop-blur"
     >
       <Image
         alt={altText}

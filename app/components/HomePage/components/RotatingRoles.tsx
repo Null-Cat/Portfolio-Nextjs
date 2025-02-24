@@ -6,7 +6,7 @@ import DecryptedText from "../../ReactBits/DecryptedText";
 const RotatingRoles = () => {
   return (
     <LayoutGroup>
-      <motion.p className="flex flex-wrap center-items gap-3" layout>
+      <motion.div className="flex flex-wrap center-items gap-3" layout>
         <motion.span
           className="pt-0.5 sm:pt-1 md:pt-2"
           layout
@@ -53,7 +53,7 @@ const RotatingRoles = () => {
             speed={50}
           />
         </motion.span>
-      </motion.p>
+      </motion.div>
     </LayoutGroup>
   );
 };

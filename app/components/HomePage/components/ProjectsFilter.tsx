@@ -115,30 +115,6 @@ const ProjectsFilter = () => {
                 size="sm"
                 endContent={<FontAwesomeIcon icon={faChevronDown} />}
               >
-                {Array.from(sortBy)[0]}
-              </Button>
-            </DropdownTrigger>
-            <DropdownMenu
-              aria-label="Sort by"
-              closeOnSelect={false}
-              selectedKeys={sortBy}
-              selectionMode="single"
-              variant="flat"
-              onSelectionChange={setSortBy}
-            >
-              {sortByValues.map((name) => (
-                <DropdownItem key={name}>{name}</DropdownItem>
-              ))}
-            </DropdownMenu>
-          </Dropdown>
-          <Dropdown shouldBlockScroll={false}>
-            <DropdownTrigger>
-              <Button
-                className="capitalize"
-                variant="bordered"
-                size="sm"
-                endContent={<FontAwesomeIcon icon={faChevronDown} />}
-              >
                 Type
               </Button>
             </DropdownTrigger>
@@ -232,6 +208,31 @@ const ProjectsFilter = () => {
                 <DropdownItem key={name} startContent={icon}>
                   {name}
                 </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
+          <Dropdown shouldBlockScroll={false}>
+            <DropdownTrigger>
+              <Button
+                className="capitalize"
+                variant="bordered"
+                size="sm"
+                endContent={<FontAwesomeIcon icon={faChevronDown} />}
+              >
+                {Array.from(sortBy)[0]}
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu
+              aria-label="Sort by"
+              closeOnSelect={false}
+              selectedKeys={sortBy}
+              selectionMode="single"
+              disallowEmptySelection={true}
+              variant="flat"
+              onSelectionChange={setSortBy}
+            >
+              {sortByValues.map((name) => (
+                <DropdownItem key={name}>{name}</DropdownItem>
               ))}
             </DropdownMenu>
           </Dropdown>

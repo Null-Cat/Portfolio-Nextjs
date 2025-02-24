@@ -1,5 +1,6 @@
 import DecryptedText from "../ReactBits/DecryptedText";
 import LetterGlitch from "../ReactBits/LetterGlitch";
+import RotatingRoles from "./components/RotatingRoles";
 
 const Introduction = () => {
   return (
@@ -22,21 +23,14 @@ const Introduction = () => {
             speed={50}
           />
           <DecryptedText
-            parentClassName="sm:text-6xl text-4xl"
+            parentClassName="sm:text-6xl text-4xl pb-1"
             text="I'm Philip"
             animateOn="view"
             revealDirection="start"
             sequential={true}
             speed={50}
           />
-          <DecryptedText
-            parentClassName="sm:text-6xl text-4xl"
-            text="I'm a Web & Game Developer"
-            animateOn="view"
-            revealDirection="start"
-            sequential={true}
-            speed={50}
-          />
+          <RotatingRoles />
         </div>
       </div>
     </div>

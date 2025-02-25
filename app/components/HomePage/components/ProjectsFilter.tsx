@@ -237,7 +237,7 @@ const ProjectsFilter = () => {
         </Dropdown>
       </div>
 
-      <div className="flex flex-wrap self-start gap-2">
+      <div className="flex flex-wrap self-start gap-2 h-min-6">
         {selectedTagKeys &&
           Array.from(selectedTagKeys).map((key) => (
             <Chip

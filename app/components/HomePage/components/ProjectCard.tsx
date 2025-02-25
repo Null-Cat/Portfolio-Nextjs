@@ -19,7 +19,7 @@ const ProjectCard = ({ image, title, description, tags }: ProjectCardProps) => {
       isBlurred
       isPressable
       shadow="sm"
-      className="w-[300px] h-[370px] backdrop-blur-sm"
+      className="w-[300px] h-[390px] backdrop-blur-sm"
     >
       <CardHeader className="flex flex-col items-center pt-3 pb-1">
         <Image

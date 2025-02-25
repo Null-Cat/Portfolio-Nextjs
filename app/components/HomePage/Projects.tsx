@@ -3,7 +3,7 @@ import Particles from "../ReactBits/Particles";
 import FadeContent from "../ReactBits/FadeContent";
 import ProjectsFilter from "./components/ProjectsFilter";
 import ProjectCard from "./components/ProjectCard";
-import { CppSVG, UnrealEngineSVG } from "../SVGs";
+import { CppSVG, JavaScriptSVG, UnrealEngineSVG } from "../SVGs";
 
 const Projects = () => {
   return (
@@ -34,7 +34,7 @@ const Projects = () => {
               image={"/endlessvendetta/EndlessVendettaCardTitle.webp"}
               title={"Endless Vendetta"}
               description={
-                "A 3rd year University Group Project, as the co-lead programmer, focusing on AI, Spatial Inventories and Complex Dialog Systems."
+                "A 3rd year University Group Project, co-lead programmer, focusing on AI, Spatial Inventories, and Dialog Systems."
               }
               tags={[
                 { name: "UE5", colour: "primary", icon: <UnrealEngineSVG /> },
@@ -45,11 +45,20 @@ const Projects = () => {
               image={"/azureabyss/cover_page.png"}
               title={"Azure Abyss"}
               description={
-                "A 2nd year University Group Project, as the lead programmer, focusing on AI, Turn-Based Combat Systems and Quest Systems."
+                "A 2nd year University Group Project, lead programmer, focusing on AI, Turn-Based Combat, and Quest Systems."
               }
               tags={[
                 { name: "UE5", colour: "primary", icon: <UnrealEngineSVG /> },
                 { name: "C++", colour: "secondary", icon: <CppSVG /> },
+              ]}
+            />
+            <ProjectCard
+              image={"/kraken/title.png"}
+              title={"The Kraken Summer Splash"}
+              description={`A commissioned project for Kraken Rum, focusing on secure score transmission and global leaderboards.`}
+              tags={[
+                { name: "Phaser 3", colour: "primary", icon: <p>🔫</p> },
+                { name: "JS", colour: "secondary", icon: <JavaScriptSVG /> },
               ]}
             />
           </div>

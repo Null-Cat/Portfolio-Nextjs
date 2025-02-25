@@ -37,7 +37,11 @@ const Projects = () => {
                 "A 3rd year University Group Project, co-lead programmer, focusing on AI, Spatial Inventories, and Dialog Systems."
               }
               tags={[
-                { name: "UE5", colour: "primary", icon: <UnrealEngineSVG /> },
+                {
+                  name: "Unreal Engine",
+                  colour: "primary",
+                  icon: <UnrealEngineSVG />,
+                },
                 { name: "C++", colour: "secondary", icon: <CppSVG /> },
               ]}
             />
@@ -48,7 +52,11 @@ const Projects = () => {
                 "A 2nd year University Group Project, lead programmer, focusing on AI, Turn-Based Combat, and Quest Systems."
               }
               tags={[
-                { name: "UE5", colour: "primary", icon: <UnrealEngineSVG /> },
+                {
+                  name: "Unreal Engine",
+                  colour: "primary",
+                  icon: <UnrealEngineSVG />,
+                },
                 { name: "C++", colour: "secondary", icon: <CppSVG /> },
               ]}
             />
@@ -58,7 +66,11 @@ const Projects = () => {
               description={`A commissioned project for Kraken Rum, focusing on secure score transmission and global leaderboards.`}
               tags={[
                 { name: "Phaser 3", colour: "primary", icon: <p>🔫</p> },
-                { name: "JS", colour: "secondary", icon: <JavaScriptSVG /> },
+                {
+                  name: "JavaScript",
+                  colour: "secondary",
+                  icon: <JavaScriptSVG />,
+                },
               ]}
             />
           </div>

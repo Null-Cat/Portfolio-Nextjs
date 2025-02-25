@@ -3,7 +3,7 @@ import Particles from "../ReactBits/Particles";
 import FadeContent from "../ReactBits/FadeContent";
 import ProjectsFilter from "./components/ProjectsFilter";
 import ProjectCard from "./components/ProjectCard";
-import { CppSVG, JavaScriptSVG, UnrealEngineSVG } from "../SVGs";
+import { CppSVG, JavaScriptSVG, NodejsSVG, UnrealEngineSVG } from "../SVGs";
 
 const Projects = () => {
   return (
@@ -29,7 +29,7 @@ const Projects = () => {
             <h1 className="sm:text-6xl text-4xl text-center">Projects</h1>
           </FadeContent>
           <ProjectsFilter />
-          <div className="flex flex-wrap content-center pt-4 gap-2">
+          <div className="flex flex-wrap content-center sm:justify-normal justify-center pt-4 gap-2">
             <ProjectCard
               image={"/endlessvendetta/EndlessVendettaCardTitle.webp"}
               title={"Endless Vendetta"}
@@ -38,7 +38,7 @@ const Projects = () => {
               }
               tags={[
                 {
-                  name: "Unreal Engine",
+                  name: "UE5",
                   colour: "primary",
                   icon: <UnrealEngineSVG />,
                 },
@@ -53,7 +53,7 @@ const Projects = () => {
               }
               tags={[
                 {
-                  name: "Unreal Engine",
+                  name: "UE5",
                   colour: "primary",
                   icon: <UnrealEngineSVG />,
                 },
@@ -67,7 +67,12 @@ const Projects = () => {
               tags={[
                 { name: "Phaser 3", colour: "primary", icon: <p>🔫</p> },
                 {
-                  name: "JavaScript",
+                  name: "Node.js",
+                  colour: "primary",
+                  icon: <NodejsSVG />,
+                },
+                {
+                  name: "JS",
                   colour: "secondary",
                   icon: <JavaScriptSVG />,
                 },

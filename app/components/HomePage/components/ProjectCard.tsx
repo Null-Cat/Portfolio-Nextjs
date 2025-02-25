@@ -19,7 +19,7 @@ const ProjectCard = ({ image, title, description, tags }: ProjectCardProps) => {
       isBlurred
       isPressable
       shadow="sm"
-      className="w-[300px] h-[390px] backdrop-blur-sm"
+      className="w-[300px] h-[370px] backdrop-blur-sm"
     >
       <CardHeader className="flex flex-col items-center pt-3 pb-1">
         <Image
@@ -29,7 +29,7 @@ const ProjectCard = ({ image, title, description, tags }: ProjectCardProps) => {
           width={270}
           height={170}
         />
-        <h3 className="font-bold text-2xl pt-1">{title}</h3>
+        <h3 className="font-bold text-lg pt-1">{title}</h3>
       </CardHeader>
       <CardBody className="overflow-visible py-0">
         <div className="flex justify-center gap-1 pb-3 w-full">

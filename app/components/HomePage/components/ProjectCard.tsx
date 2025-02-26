@@ -11,15 +11,24 @@ interface ProjectCardProps {
   title: string;
   description: string;
   tags: ProjectTag[];
+  href?: string;
 }
 
-const ProjectCard = ({ image, title, description, tags }: ProjectCardProps) => {
+const ProjectCard = ({
+  image,
+  title,
+  description,
+  tags,
+  href,
+}: ProjectCardProps) => {
   return (
     <Card
       isBlurred
       isPressable
       shadow="sm"
       className="w-[300px] h-[370px] backdrop-blur-sm"
+      as="a"
+      href={href}
     >
       <CardHeader className="flex flex-col items-center pt-3 pb-1">
         <Image

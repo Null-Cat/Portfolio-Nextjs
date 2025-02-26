@@ -62,4 +62,7 @@ export default {
   },
   darkMode: "class",
   plugins: [heroui(), tailwindcssAnimate],
+  corePlugins: {
+    scrollBehavior: true,
+  },
 } satisfies Config;

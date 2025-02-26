@@ -7,7 +7,7 @@ import { CppSVG, JavaScriptSVG, NodejsSVG, UnrealEngineSVG } from "../SVGs";
 
 const Projects = () => {
   return (
-    <div className="sm:h-svh h-[230svh]">
+    <div id="Projects" className="sm:h-svh h-[230svh]">
       <div className="relative h-full w-full">
         <Particles
           particleColors={["#ffffff", "#ffffff"]}

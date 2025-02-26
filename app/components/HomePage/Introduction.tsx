@@ -4,7 +4,7 @@ import RotatingRoles from "./components/RotatingRoles";
 
 const Introduction = () => {
   return (
-    <div className="h-svh">
+    <div id="Home" className="h-svh">
       <div className="relative h-full w-full">
         <LetterGlitch
           glitchSpeed={50}

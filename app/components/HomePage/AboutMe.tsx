@@ -6,7 +6,7 @@ import OtherTechnologyExperience from "./components/OtherTechnologyExperience";
 
 const AboutMe = () => {
   return (
-    <div className="sm:h-svh h-[230svh]">
+    <div id="About" className="sm:h-svh h-[230svh]">
       <div className="relative h-full w-full">
         <Squares
           speed={0.5}

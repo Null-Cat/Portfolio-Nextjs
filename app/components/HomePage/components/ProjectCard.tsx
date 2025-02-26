@@ -27,7 +27,7 @@ const ProjectCard = ({ image, title, description, tags }: ProjectCardProps) => {
           className="object-cover rounded-xl"
           src={image}
           width={270}
-          height={170}
+          height={200}
         />
         <h3 className="font-bold text-lg pt-1">{title}</h3>
       </CardHeader>

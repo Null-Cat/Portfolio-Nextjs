@@ -29,12 +29,12 @@ const Projects = () => {
             <h1 className="sm:text-6xl text-4xl text-center">Projects</h1>
           </FadeContent>
           <ProjectsFilter />
-          <div className="flex flex-wrap content-center sm:justify-normal justify-center pt-4 gap-2">
+          <div className="flex flex-wrap content-center sm:justify-normal justify-center pt-4 gap-4">
             <ProjectCard
               image={"/endlessvendetta/EndlessVendettaCardTitle.webp"}
               title={"Endless Vendetta"}
               description={
-                "A 3rd year University Group Project, co-lead programmer, focusing on AI, Spatial Inventories, and Dialog Systems."
+                "A 3rd year Uni Group Project, co-lead programmer, focusing on AI, Spatial Inventories, and Dialog Systems."
               }
               tags={[
                 {
@@ -49,7 +49,7 @@ const Projects = () => {
               image={"/azureabyss/cover_page.png"}
               title={"Azure Abyss"}
               description={
-                "A 2nd year University Group Project, lead programmer, focusing on AI, Turn-Based Combat, and Quest Systems."
+                "A 2nd year Uni Group Project, lead programmer, focusing on AI, Turn-Based Combat, and Quest Systems."
               }
               tags={[
                 {
@@ -76,6 +76,55 @@ const Projects = () => {
                   colour: "secondary",
                   icon: <JavaScriptSVG />,
                 },
+              ]}
+            />
+            <ProjectCard
+              image={"/fatjohnslifter/CoverArtBanner.webp"}
+              title={"Fat John's Lifter"}
+              description={`Apart Global Game Jam 2024, as the programmer in a team of 5 with the theme "Make Me Laugh" focusing on AI, UI and UX.`}
+              tags={[
+                {
+                  name: "UE5",
+                  colour: "primary",
+                  icon: <UnrealEngineSVG />,
+                },
+                { name: "C++", colour: "secondary", icon: <CppSVG /> },
+              ]}
+            />
+            <ProjectCard
+              image={"/corruptedmemory/corruptedmemory_cover.png"}
+              title={"Corrupted Memory"}
+              description={`A Uni Solo Project, focusing on networking, webservers, websockets, RPCs, lobby systems and dedicated servers.`}
+              tags={[
+                {
+                  name: "UE5",
+                  colour: "primary",
+                  icon: <UnrealEngineSVG />,
+                },
+                {
+                  name: "Node.js",
+                  colour: "primary",
+                  icon: <NodejsSVG />,
+                },
+                { name: "C++", colour: "secondary", icon: <CppSVG /> },
+                {
+                  name: "JS",
+                  colour: "secondary",
+                  icon: <JavaScriptSVG />,
+                },
+              ]}
+            />
+            <ProjectCard
+              image={"/goapai/actionPlan.png"}
+              title={"GOAP AI"}
+              description={`A Uni Project for a Turn-Based Combat AI implementing GOAP intended for the project Azure Abyss.`}
+              tags={[
+                {
+                  name: "UE5",
+                  colour: "primary",
+                  icon: <UnrealEngineSVG />,
+                },
+                { name: "C++", colour: "secondary", icon: <CppSVG /> },
               ]}
             />
           </div>

@@ -1,10 +1,5 @@
 import { Card, CardBody, CardHeader, Chip, Image } from "@heroui/react";
-
-interface ProjectTag {
-  name: string;
-  colour: "primary" | "secondary" | "success" | "danger" | "warning";
-  icon: React.ReactNode;
-}
+import { ProjectTag } from "../Projects";
 
 interface ProjectCardProps {
   image: string;

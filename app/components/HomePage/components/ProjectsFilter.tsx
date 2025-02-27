@@ -18,7 +18,7 @@ import {
   Input,
   SharedSelection,
 } from "@heroui/react";
-import { ReactNode, useState } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 import {
   CppSVG,
   CSharpSVG,
@@ -36,7 +36,23 @@ interface ProjectTag {
   icon: ReactNode;
 }
 
-const ProjectsFilter = () => {
+interface ProjectsFilterProps {
+  searchQuery: string;
+  setSearchQuery: Dispatch<SetStateAction<string>>;
+  selectedTagKeys: SharedSelection;
+  setSelectedTagKeys: Dispatch<SetStateAction<SharedSelection>>;
+  sortBy: SharedSelection;
+  setSortBy: Dispatch<SetStateAction<SharedSelection>>;
+}
+
+const ProjectsFilter = ({
+  searchQuery,
+  setSearchQuery,
+  selectedTagKeys,
+  setSelectedTagKeys,
+  sortBy,
+  setSortBy,
+}: ProjectsFilterProps) => {
   const projectTypeTags: ProjectTag[] = [
     {
       name: "Web",
@@ -85,9 +101,6 @@ const ProjectsFilter = () => {
   ];
   const sortByValues = ["Relevance", "Newest", "Oldest", "A-Z", "Z-A"];
 
-  const [sortBy, setSortBy] = useState<SharedSelection>(new Set(["Relevance"]));
-  const [selectedTagKeys, setSelectedTagKeys] = useState<SharedSelection>();
-
   const handleRemoveTagFilter = (key: Key) => {
     setSelectedTagKeys((prev) => {
       const newSet = new Set(prev);
@@ -105,6 +118,8 @@ const ProjectsFilter = () => {
           placeholder="Search"
           startContent={<FontAwesomeIcon icon={faMagnifyingGlass} />}
           type="search"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
         <Dropdown shouldBlockScroll={false}>
           <DropdownTrigger>

@@ -1,9 +1,11 @@
-import React from "react";
+"use client";
+import { useState } from "react";
 import Particles from "../ReactBits/Particles";
 import FadeContent from "../ReactBits/FadeContent";
 import ProjectsFilter from "./components/ProjectsFilter";
 import ProjectCard from "./components/ProjectCard";
 import { CppSVG, JavaScriptSVG, NodejsSVG, UnrealEngineSVG } from "../SVGs";
+import { SharedSelection } from "@heroui/react";
 
 interface ProjectTag {
   name: string;
@@ -82,6 +84,12 @@ const Projects = () => {
     },
   ];
 
+  const [sortBy, setSortBy] = useState<SharedSelection>(new Set(["Relevance"]));
+  const [selectedTagKeys, setSelectedTagKeys] = useState<SharedSelection>(
+    new Set()
+  );
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
   return (
     <div id="Projects" className="sm:h-[110svh] h-[230svh]">
       <div className="relative h-full w-full">
@@ -111,7 +119,14 @@ const Projects = () => {
             easing="ease-out"
             initialOpacity={0}
           >
-            <ProjectsFilter />
+            <ProjectsFilter
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              selectedTagKeys={selectedTagKeys}
+              setSelectedTagKeys={setSelectedTagKeys}
+              sortBy={sortBy}
+              setSortBy={setSortBy}
+            />
           </FadeContent>
           <div className="flex flex-wrap content-center sm:justify-normal justify-center pt-4 gap-4">
             {projects.map((project, index) => (

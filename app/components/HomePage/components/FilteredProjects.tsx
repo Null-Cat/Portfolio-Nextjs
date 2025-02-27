@@ -22,7 +22,7 @@ const FilteredProjects = () => {
       image: "/endlessvendetta/EndlessVendettaCardTitle.webp",
       title: "Endless Vendetta",
       description:
-        "A 3rd year Uni Group Project, co-lead programmer, focusing on AI, Spatial Inventories, and Dialog Systems.",
+        "A 3rd year uni group project, co-lead programmer, focusing on AI, spatial inventories, and dialog systems.",
       tags: [
         {
           name: "UE",
@@ -43,7 +43,7 @@ const FilteredProjects = () => {
       image: "/azureabyss/cover_page.png",
       title: "Azure Abyss",
       description:
-        "A 2nd year Uni Group Project, lead programmer, focusing on AI, Turn-Based Combat, and Quest Systems.",
+        "A 2nd year uni group project, lead programmer, focusing on AI, turn-based combat, and quest systems.",
       tags: [
         {
           name: "UE",
@@ -90,7 +90,7 @@ const FilteredProjects = () => {
     {
       image: "/fatjohnslifter/CoverArtBanner.webp",
       title: "Fat John's Lifter",
-      description: `Apart Global Game Jam 2024, as the programmer in a team of 5 with the theme "Make Me Laugh" focusing on AI, UI and UX.`,
+      description: `A Global Game Jam 2024 project, as the programmer in a team of 5 with the theme "Make Me Laugh" focusing on AI, UI and UX.`,
       tags: [
         {
           name: "UE",
@@ -110,7 +110,7 @@ const FilteredProjects = () => {
     {
       image: "/corruptedmemory/corruptedmemory_cover.png",
       title: "Corrupted Memory",
-      description: `A Uni Solo Project, focusing on networking, webservers, websockets, RPCs, lobby systems and dedicated servers.`,
+      description: `A uni solo project, focusing on networking, webservers, websockets, RPCs, lobby systems and dedicated UE5 servers.`,
       tags: [
         {
           name: "UE",

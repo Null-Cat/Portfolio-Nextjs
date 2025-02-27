@@ -192,7 +192,7 @@ const FilteredProjects = () => {
       <FadeContent
         blur={true}
         duration={1000}
-        delay={500}
+        delay={200}
         easing="ease-out"
         initialOpacity={0}
       >

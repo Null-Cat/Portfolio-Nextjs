@@ -99,7 +99,6 @@ const ProjectsFilter = ({
       ),
     },
   ];
-  const sortByValues = ["Relevance", "Newest", "Oldest", "A-Z", "Z-A"];
 
   const handleRemoveTagFilter = (key: Key) => {
     setSelectedTagKeys((prev) => {
@@ -114,12 +113,14 @@ const ProjectsFilter = ({
       <div className="flex flex-wrap w-full gap-1">
         <Input
           className="md:w-1/3 lg:w-2/12 sm:pb-0 w-full pb-2 pr-1"
+          isClearable
           size="sm"
-          placeholder="Search"
+          placeholder="Search Titles"
           startContent={<FontAwesomeIcon icon={faMagnifyingGlass} />}
           type="search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onClear={() => setSearchQuery("")}
         />
         <Dropdown shouldBlockScroll={false}>
           <DropdownTrigger>
@@ -222,31 +223,6 @@ const ProjectsFilter = ({
               <DropdownItem key={name} startContent={icon}>
                 {name}
               </DropdownItem>
-            ))}
-          </DropdownMenu>
-        </Dropdown>
-        <Dropdown shouldBlockScroll={false}>
-          <DropdownTrigger>
-            <Button
-              className="capitalize"
-              variant="bordered"
-              size="sm"
-              endContent={<FontAwesomeIcon icon={faChevronDown} />}
-            >
-              {Array.from(sortBy)[0]}
-            </Button>
-          </DropdownTrigger>
-          <DropdownMenu
-            aria-label="Sort by"
-            closeOnSelect={false}
-            selectedKeys={sortBy}
-            selectionMode="single"
-            disallowEmptySelection={true}
-            variant="flat"
-            onSelectionChange={setSortBy}
-          >
-            {sortByValues.map((name) => (
-              <DropdownItem key={name}>{name}</DropdownItem>
             ))}
           </DropdownMenu>
         </Dropdown>

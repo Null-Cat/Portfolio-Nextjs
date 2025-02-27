@@ -1,11 +1,11 @@
 import { Card, CardBody, CardHeader, Chip, Image } from "@heroui/react";
-import { ProjectTag } from "../Projects";
+import { VisibleProjectTag } from "../Projects";
 
 interface ProjectCardProps {
   image: string;
   title: string;
   description: string;
-  tags: ProjectTag[];
+  tags: VisibleProjectTag[];
   href?: string;
 }
 

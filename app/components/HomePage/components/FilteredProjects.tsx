@@ -37,7 +37,7 @@ const FilteredProjects = () => {
           filterKey: "C++",
         },
       ],
-      hiddenTags: ["Game"],
+      hiddenTags: ["Completed", "Game"],
     },
     {
       image: "/azureabyss/cover_page.png",
@@ -58,7 +58,7 @@ const FilteredProjects = () => {
           filterKey: "C++",
         },
       ],
-      hiddenTags: ["Game"],
+      hiddenTags: ["Completed", "Game"],
     },
     {
       image: "/kraken/title.png",
@@ -85,7 +85,7 @@ const FilteredProjects = () => {
           filterKey: "JavaScript",
         },
       ],
-      hiddenTags: ["Web", "Game"],
+      hiddenTags: ["Completed", "Web", "Game"],
     },
     {
       image: "/fatjohnslifter/CoverArtBanner.webp",
@@ -105,7 +105,7 @@ const FilteredProjects = () => {
           filterKey: "C++",
         },
       ],
-      hiddenTags: ["Game"],
+      hiddenTags: ["Completed", "Game"],
     },
     {
       image: "/corruptedmemory/corruptedmemory_cover.png",
@@ -137,7 +137,7 @@ const FilteredProjects = () => {
           filterKey: "JavaScript",
         },
       ],
-      hiddenTags: ["Web", "Game"],
+      hiddenTags: ["Completed", "Web", "Game"],
     },
     {
       image: "/goapai/actionPlan.png",
@@ -157,7 +157,7 @@ const FilteredProjects = () => {
           filterKey: "C++",
         },
       ],
-      hiddenTags: ["Game"],
+      hiddenTags: ["Completed", "Game"],
     },
   ];
 
@@ -208,10 +208,10 @@ const FilteredProjects = () => {
       <div className="flex flex-wrap content-center sm:justify-normal justify-center pt-4 gap-4">
         {projectResults.map((project, index) => (
           <FadeContent
-            key={project.title}
+            key={`${project.title}-${index}`}
             blur={false}
             duration={1000}
-            delay={600 + index * 100}
+            delay={index * 100}
             easing="ease-out"
             initialOpacity={0}
           >

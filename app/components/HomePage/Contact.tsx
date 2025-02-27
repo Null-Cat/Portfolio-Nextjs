@@ -1,4 +1,4 @@
-import { Avatar, Link } from "@heroui/react";
+import { Avatar, Form, Link } from "@heroui/react";
 import FadeContent from "../ReactBits/FadeContent";
 import Threads from "../ReactBits/Thread";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,19 +21,17 @@ const Contact = () => {
             <h1 className="sm:text-6xl text-4xl text-center">Contact Me</h1>
           </FadeContent>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
+            <div className="flex flex-col gap-2 w-full">
+              <Form validationBehavior="aria"></Form>
+            </div>
             <div className="flex flex-col gap-2 justify-center items-center w-full">
-              <Avatar
-                isBordered
-                className="sm:h-[300px] sm:w-[300px] h-[100px] w-[100px]"
-                src="profile.jpg"
-              />
               <div className="flex flex-col border border-default-100 backdrop-blur px-2 py-2 rounded-lg gap-2 sm:mt-8 mt-4">
                 <div className="flex items-center gap-2">
-                  <FontAwesomeIcon icon={faLocationDot} />
+                  <FontAwesomeIcon className="w-4 h-4" icon={faLocationDot} />
                   <p className="text-center">UK</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <FontAwesomeIcon icon={faLinkedin} />
+                  <FontAwesomeIcon className="w-4 h-4" icon={faLinkedin} />
                   <Link
                     isExternal
                     showAnchorIcon
@@ -46,7 +44,7 @@ const Contact = () => {
                   </Link>
                 </div>
                 <div className="flex items-center gap-2">
-                  <FontAwesomeIcon icon={faGithub} />
+                  <FontAwesomeIcon className="w-4 h-4" icon={faGithub} />
                   <Link
                     isExternal
                     showAnchorIcon
@@ -64,6 +62,7 @@ const Contact = () => {
                     width="1em"
                     height="1em"
                     viewBox="0 0 24 24"
+                    className="w-4 h-4"
                   >
                     <path
                       fill="currentColor"
@@ -82,7 +81,7 @@ const Contact = () => {
                   </Link>
                 </div>
                 <div className="flex items-center gap-2">
-                  <FontAwesomeIcon icon={faEnvelope} />
+                  <FontAwesomeIcon className="w-4 h-4" icon={faEnvelope} />
                   <Link
                     isExternal
                     href="mailto:philip@philipwhite.dev"
@@ -95,7 +94,6 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col gap-2 w-full"></div>
           </div>
         </div>
       </div>

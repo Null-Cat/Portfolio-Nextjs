@@ -1,25 +1,29 @@
 import { Card, CardBody, CardHeader, Chip, Image } from "@heroui/react";
-
-interface ProjectTag {
-  name: string;
-  colour: "primary" | "secondary" | "success" | "danger" | "warning";
-  icon: React.ReactNode;
-}
+import { VisibleProjectTag } from "../Projects";
 
 interface ProjectCardProps {
   image: string;
   title: string;
   description: string;
-  tags: ProjectTag[];
+  tags: VisibleProjectTag[];
+  href?: string;
 }
 
-const ProjectCard = ({ image, title, description, tags }: ProjectCardProps) => {
+const ProjectCard = ({
+  image,
+  title,
+  description,
+  tags,
+  href,
+}: ProjectCardProps) => {
   return (
     <Card
       isBlurred
       isPressable
       shadow="sm"
       className="w-[300px] h-[370px] backdrop-blur-sm"
+      as="a"
+      href={href}
     >
       <CardHeader className="flex flex-col items-center pt-3 pb-1">
         <Image
@@ -27,7 +31,7 @@ const ProjectCard = ({ image, title, description, tags }: ProjectCardProps) => {
           className="object-cover rounded-xl"
           src={image}
           width={270}
-          height={170}
+          height={200}
         />
         <h3 className="font-bold text-lg pt-1">{title}</h3>
       </CardHeader>

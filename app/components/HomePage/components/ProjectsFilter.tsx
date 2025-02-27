@@ -18,7 +18,7 @@ import {
   Input,
   SharedSelection,
 } from "@heroui/react";
-import { ReactNode, useState } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 import {
   CppSVG,
   CSharpSVG,
@@ -36,7 +36,23 @@ interface ProjectTag {
   icon: ReactNode;
 }
 
-const ProjectsFilter = () => {
+interface ProjectsFilterProps {
+  searchQuery: string;
+  setSearchQuery: Dispatch<SetStateAction<string>>;
+  selectedTagKeys: SharedSelection;
+  setSelectedTagKeys: Dispatch<SetStateAction<SharedSelection>>;
+  sortBy: SharedSelection;
+  setSortBy: Dispatch<SetStateAction<SharedSelection>>;
+}
+
+const ProjectsFilter = ({
+  searchQuery,
+  setSearchQuery,
+  selectedTagKeys,
+  setSelectedTagKeys,
+  sortBy,
+  setSortBy,
+}: ProjectsFilterProps) => {
   const projectTypeTags: ProjectTag[] = [
     {
       name: "Web",
@@ -83,10 +99,6 @@ const ProjectsFilter = () => {
       ),
     },
   ];
-  const sortByValues = ["Relevance", "Newest", "Oldest", "A-Z", "Z-A"];
-
-  const [sortBy, setSortBy] = useState<SharedSelection>(new Set(["Relevance"]));
-  const [selectedTagKeys, setSelectedTagKeys] = useState<SharedSelection>();
 
   const handleRemoveTagFilter = (key: Key) => {
     setSelectedTagKeys((prev) => {
@@ -101,10 +113,14 @@ const ProjectsFilter = () => {
       <div className="flex flex-wrap w-full gap-1">
         <Input
           className="md:w-1/3 lg:w-2/12 sm:pb-0 w-full pb-2 pr-1"
+          isClearable
           size="sm"
-          placeholder="Search"
+          placeholder="Search Titles"
           startContent={<FontAwesomeIcon icon={faMagnifyingGlass} />}
           type="search"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onClear={() => setSearchQuery("")}
         />
         <Dropdown shouldBlockScroll={false}>
           <DropdownTrigger>
@@ -210,34 +226,8 @@ const ProjectsFilter = () => {
             ))}
           </DropdownMenu>
         </Dropdown>
-        <Dropdown shouldBlockScroll={false}>
-          <DropdownTrigger>
-            <Button
-              className="capitalize"
-              variant="bordered"
-              size="sm"
-              endContent={<FontAwesomeIcon icon={faChevronDown} />}
-            >
-              {Array.from(sortBy)[0]}
-            </Button>
-          </DropdownTrigger>
-          <DropdownMenu
-            aria-label="Sort by"
-            closeOnSelect={false}
-            selectedKeys={sortBy}
-            selectionMode="single"
-            disallowEmptySelection={true}
-            variant="flat"
-            onSelectionChange={setSortBy}
-          >
-            {sortByValues.map((name) => (
-              <DropdownItem key={name}>{name}</DropdownItem>
-            ))}
-          </DropdownMenu>
-        </Dropdown>
       </div>
-
-      <div className="flex flex-wrap self-start gap-2 h-min-6">
+      <div className="flex flex-wrap self-start gap-2 min-h-7">
         {selectedTagKeys &&
           Array.from(selectedTagKeys).map((key) => (
             <Chip

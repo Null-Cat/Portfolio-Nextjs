@@ -59,22 +59,22 @@ const NavbarMain = () => {
         justify="center"
       >
         <NavbarItem>
-          <Link color="foreground" href="#Home">
+          <Link color="foreground" href="/#Home">
             Home
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#About">
+          <Link color="foreground" href="/#About">
             About
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#Projects">
+          <Link color="foreground" href="/#Projects">
             Projects
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#Contact">
+          <Link color="foreground" href="/#Contact">
             Contact
           </Link>
         </NavbarItem>
@@ -133,7 +133,7 @@ const NavbarMain = () => {
           <Link
             className="w-full"
             color={"foreground"}
-            href="#Home"
+            href="/#Home"
             size="lg"
             onClickCapture={() => setIsMenuOpen(false)}
           >
@@ -144,7 +144,7 @@ const NavbarMain = () => {
           <Link
             className="w-full"
             color={"foreground"}
-            href="#About"
+            href="/#About"
             size="lg"
             onClickCapture={() => setIsMenuOpen(false)}
           >
@@ -155,7 +155,7 @@ const NavbarMain = () => {
           <Link
             className="w-full"
             color={"foreground"}
-            href="#Projects"
+            href="/#Projects"
             size="lg"
             onClickCapture={() => setIsMenuOpen(false)}
           >
@@ -166,7 +166,7 @@ const NavbarMain = () => {
           <Link
             className="w-full"
             color={"foreground"}
-            href="#Contact"
+            href="/#Contact"
             size="lg"
             onClickCapture={() => setIsMenuOpen(false)}
           >

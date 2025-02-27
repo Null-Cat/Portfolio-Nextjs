@@ -130,6 +130,32 @@ const ProjectsFilter = ({
               size="sm"
               endContent={<FontAwesomeIcon icon={faChevronDown} />}
             >
+              Status
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu
+            aria-label="Filter by Project Status"
+            closeOnSelect={false}
+            selectedKeys={selectedTagKeys}
+            selectionMode="multiple"
+            variant="flat"
+            onSelectionChange={setSelectedTagKeys}
+          >
+            {projectStatusTags.map(({ name, icon }) => (
+              <DropdownItem key={name} startContent={icon}>
+                {name}
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        </Dropdown>
+        <Dropdown shouldBlockScroll={false}>
+          <DropdownTrigger>
+            <Button
+              className="capitalize"
+              variant="bordered"
+              size="sm"
+              endContent={<FontAwesomeIcon icon={faChevronDown} />}
+            >
               Type
             </Button>
           </DropdownTrigger>
@@ -194,32 +220,6 @@ const ProjectsFilter = ({
             onSelectionChange={setSelectedTagKeys}
           >
             {projectLanguageTags.map(({ name, icon }) => (
-              <DropdownItem key={name} startContent={icon}>
-                {name}
-              </DropdownItem>
-            ))}
-          </DropdownMenu>
-        </Dropdown>
-        <Dropdown shouldBlockScroll={false}>
-          <DropdownTrigger>
-            <Button
-              className="capitalize"
-              variant="bordered"
-              size="sm"
-              endContent={<FontAwesomeIcon icon={faChevronDown} />}
-            >
-              Status
-            </Button>
-          </DropdownTrigger>
-          <DropdownMenu
-            aria-label="Filter by Project Status"
-            closeOnSelect={false}
-            selectedKeys={selectedTagKeys}
-            selectionMode="multiple"
-            variant="flat"
-            onSelectionChange={setSelectedTagKeys}
-          >
-            {projectStatusTags.map(({ name, icon }) => (
               <DropdownItem key={name} startContent={icon}>
                 {name}
               </DropdownItem>

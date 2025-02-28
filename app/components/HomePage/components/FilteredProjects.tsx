@@ -5,7 +5,14 @@ import FadeContent from "../../ReactBits/FadeContent";
 import { useState } from "react";
 import { SharedSelection } from "@heroui/react";
 import { VisibleProjectTag } from "../Projects";
-import { CppSVG, JavaScriptSVG, NodejsSVG, UnrealEngineSVG } from "../../SVGs";
+import {
+  CppSVG,
+  CSharpSVG,
+  JavaScriptSVG,
+  NodejsSVG,
+  UnitySVG,
+  UnrealEngineSVG,
+} from "../../SVGs";
 
 interface Project {
   image: string;
@@ -155,6 +162,46 @@ const FilteredProjects = () => {
           colour: "secondary",
           icon: <CppSVG />,
           filterKey: "C++",
+        },
+      ],
+      hiddenTags: ["Completed", "Game"],
+    },
+    {
+      image: "/snowdown/titleScreen.jpg",
+      title: "Snowdown",
+      description: `A 1st year Uni Project split screen co-op projectile combat game focusing on controller support.`,
+      tags: [
+        {
+          name: "Unity",
+          colour: "primary",
+          icon: <UnitySVG />,
+          filterKey: "Unity",
+        },
+        {
+          name: "C#",
+          colour: "secondary",
+          icon: <CSharpSVG />,
+          filterKey: "C#",
+        },
+      ],
+      hiddenTags: ["Completed", "Game"],
+    },
+    {
+      image: "/pastyprotector/titleScreen.png",
+      title: "Pasty Protector",
+      description: `A 1st year Uni Project for a 2D arcade shooter game focusing on global leaderboards and SQL Databases.`,
+      tags: [
+        {
+          name: "Unity",
+          colour: "primary",
+          icon: <UnitySVG />,
+          filterKey: "Unity",
+        },
+        {
+          name: "C#",
+          colour: "secondary",
+          icon: <CSharpSVG />,
+          filterKey: "C#",
         },
       ],
       hiddenTags: ["Completed", "Game"],

@@ -7,7 +7,6 @@ const ContactForm = () => {
   return (
     <Form
       className="flex flex-col justify-center items-center h-full"
-      validationBehavior="aria"
       onSubmit={(e) => {
         e.preventDefault();
         alert("Message sent!");

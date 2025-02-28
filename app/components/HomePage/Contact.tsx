@@ -7,7 +7,7 @@ import ContactForm from "./components/ContactForm";
 
 const Contact = () => {
   return (
-    <div id="Contact" className="h-svh">
+    <div id="Contact" className="h-[135svh] sm:h-svh">
       <div className="relative h-full w-full">
         <div className="absolute inset-0 flex flex-col px-4 pt-20">
           <FadeContent

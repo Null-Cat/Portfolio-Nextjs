@@ -1,9 +1,10 @@
-import { Avatar, Form, Link } from "@heroui/react";
+import { Link } from "@heroui/react";
 import FadeContent from "../ReactBits/FadeContent";
 import Threads from "../ReactBits/Thread";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import ContactForm from "./components/ContactForm";
 
 const Contact = () => {
   return (
@@ -21,11 +22,11 @@ const Contact = () => {
             <h1 className="sm:text-6xl text-4xl text-center">Contact Me</h1>
           </FadeContent>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
-            <div className="flex flex-col gap-2 w-full">
-              <Form validationBehavior="aria"></Form>
+            <div className="flex flex-col w-full">
+              <ContactForm />
             </div>
             <div className="flex flex-col gap-2 justify-center items-center w-full">
-              <div className="flex flex-col border border-default-100 backdrop-blur px-2 py-2 rounded-lg gap-2 sm:mt-8 mt-4">
+              <div className="flex flex-col border border-default-100 backdrop-blur p-4 rounded-lg gap-2">
                 <div className="flex items-center gap-2">
                   <FontAwesomeIcon className="w-4 h-4" icon={faLocationDot} />
                   <p className="text-center">UK</p>

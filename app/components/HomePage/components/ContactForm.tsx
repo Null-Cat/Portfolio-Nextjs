@@ -13,7 +13,7 @@ const ContactForm = () => {
         alert("Message sent!");
       }}
     >
-      <div className="grid sm:grid-cols-2 grid-cols-1 gap-4 border border-default-100 backdrop-blur p-4 rounded-lg w-[90%]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border border-default-100 backdrop-blur p-4 rounded-lg lg:w-[90%] w-full">
         <Input
           isRequired
           isClearable
@@ -36,7 +36,7 @@ const ContactForm = () => {
         <Input
           isRequired
           isClearable
-          className="col-span-2"
+          className="sm:col-span-2"
           label="Subject"
           labelPlacement="outside"
           placeholder="Let's talk about..."
@@ -45,14 +45,14 @@ const ContactForm = () => {
         <Textarea
           isRequired
           isClearable
-          className="col-span-2"
+          className="sm:col-span-2"
           label="Message"
           labelPlacement="outside"
           placeholder="Your message here..."
           minRows={5}
         />
         <Button
-          className="col-span-2"
+          className="sm:col-span-2"
           color="primary"
           variant="shadow"
           type="submit"

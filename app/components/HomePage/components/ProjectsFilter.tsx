@@ -118,6 +118,7 @@ const ProjectsFilter = ({
           placeholder="Search Titles"
           startContent={<FontAwesomeIcon icon={faMagnifyingGlass} />}
           type="search"
+          variant="bordered"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onClear={() => setSearchQuery("")}

@@ -46,14 +46,6 @@ const NavbarMain = () => {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="start">
-        <NavbarBrand>
-          <Link href="/" className="text-inherit text-2xl">
-            Philip White
-          </Link>
-        </NavbarBrand>
-      </NavbarContent>
-
       <NavbarContent
         className="hidden absolute inset-0 sm:flex items-center"
         justify="center"
@@ -83,6 +75,14 @@ const NavbarMain = () => {
             CV
           </Link>
         </NavbarItem>
+      </NavbarContent>
+
+      <NavbarContent className="hidden sm:flex gap-4" justify="start">
+        <NavbarBrand>
+          <Link href="/" className="text-inherit text-2xl pointer-events-auto">
+            Philip White
+          </Link>
+        </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-2" justify="end">

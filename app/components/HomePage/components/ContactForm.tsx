@@ -16,6 +16,7 @@ const ContactForm = () => {
         <Input
           isRequired
           isClearable
+          variant="bordered"
           label="Name"
           labelPlacement="outside"
           placeholder="Your Name"
@@ -24,6 +25,7 @@ const ContactForm = () => {
         <Input
           isRequired
           isClearable
+          variant="bordered"
           label="Email"
           labelPlacement="outside"
           placeholder="example@domain.com"
@@ -31,11 +33,13 @@ const ContactForm = () => {
             <FontAwesomeIcon className="w-4 h-4" icon={faEnvelope} />
           }
           type="email"
+          errorMessage="Please enter a valid email address"
         />
         <Input
           isRequired
           isClearable
           className="sm:col-span-2"
+          variant="bordered"
           label="Subject"
           labelPlacement="outside"
           placeholder="Let's talk about..."
@@ -45,6 +49,7 @@ const ContactForm = () => {
           isRequired
           isClearable
           className="sm:col-span-2"
+          variant="bordered"
           label="Message"
           labelPlacement="outside"
           placeholder="Your message here..."

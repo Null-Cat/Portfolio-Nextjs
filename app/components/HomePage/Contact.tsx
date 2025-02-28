@@ -1,6 +1,5 @@
 import { Link } from "@heroui/react";
 import FadeContent from "../ReactBits/FadeContent";
-import Threads from "../ReactBits/Thread";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faLocationDot } from "@fortawesome/free-solid-svg-icons";
@@ -10,7 +9,6 @@ const Contact = () => {
   return (
     <div id="Contact" className="h-svh">
       <div className="relative h-full w-full">
-        <Threads amplitude={2} distance={0.5} enableMouseInteraction={false} />
         <div className="absolute inset-0 flex flex-col px-4 pt-20">
           <FadeContent
             className="h-fit"

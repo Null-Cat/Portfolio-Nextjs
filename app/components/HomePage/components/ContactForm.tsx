@@ -16,6 +16,7 @@ const ContactForm = () => {
         <Input
           isRequired
           isClearable
+          id="nameInput"
           variant="bordered"
           label="Name"
           labelPlacement="outside"
@@ -26,6 +27,7 @@ const ContactForm = () => {
         <Input
           isRequired
           isClearable
+          id="emailInput"
           variant="bordered"
           label="Email"
           labelPlacement="outside"
@@ -40,6 +42,7 @@ const ContactForm = () => {
         <Input
           isRequired
           isClearable
+          id="subjectInput"
           className="sm:col-span-2"
           variant="bordered"
           label="Subject"
@@ -51,6 +54,7 @@ const ContactForm = () => {
         <Textarea
           isRequired
           isClearable
+          id="msgArea"
           className="sm:col-span-2"
           variant="bordered"
           label="Message"

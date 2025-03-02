@@ -21,6 +21,7 @@ const ContactForm = () => {
           labelPlacement="outside"
           placeholder="Your Name"
           type="text"
+          maxLength={30}
         />
         <Input
           isRequired
@@ -34,6 +35,7 @@ const ContactForm = () => {
           }
           type="email"
           errorMessage="Please enter a valid email address"
+          maxLength={40}
         />
         <Input
           isRequired
@@ -44,6 +46,7 @@ const ContactForm = () => {
           labelPlacement="outside"
           placeholder="Let's talk about..."
           type="text"
+          maxLength={90}
         />
         <Textarea
           isRequired
@@ -54,6 +57,7 @@ const ContactForm = () => {
           labelPlacement="outside"
           placeholder="Your message here..."
           minRows={5}
+          maxLength={1000}
         />
         <Button
           className="sm:col-span-2"

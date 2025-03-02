@@ -122,6 +122,7 @@ const ProjectsFilter = ({
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onClear={() => setSearchQuery("")}
+          maxLength={25}
         />
         <Dropdown shouldBlockScroll={false}>
           <DropdownTrigger>

@@ -45,6 +45,7 @@ const FilteredProjects = () => {
         },
       ],
       hiddenTags: ["Completed", "Game"],
+      href: "/project/endlessvendetta",
     },
     {
       image: "/azureabyss/cover_page.png",
@@ -66,6 +67,7 @@ const FilteredProjects = () => {
         },
       ],
       hiddenTags: ["Completed", "Game"],
+      href: "/project/azureabyss",
     },
     {
       image: "/kraken/title.png",
@@ -93,6 +95,7 @@ const FilteredProjects = () => {
         },
       ],
       hiddenTags: ["Completed", "Web", "Game"],
+      href: "/project/thekrakensummersplash",
     },
     {
       image: "/fatjohnslifter/CoverArtBanner.webp",
@@ -113,6 +116,7 @@ const FilteredProjects = () => {
         },
       ],
       hiddenTags: ["Completed", "Game"],
+      href: "/project/fatjohnslifter",
     },
     {
       image: "/corruptedmemory/corruptedmemory_cover.png",
@@ -145,6 +149,7 @@ const FilteredProjects = () => {
         },
       ],
       hiddenTags: ["Completed", "Web", "Game"],
+      href: "/project/corruptedmemory",
     },
     {
       image: "/goapai/actionPlan.png",
@@ -165,6 +170,7 @@ const FilteredProjects = () => {
         },
       ],
       hiddenTags: ["Completed", "Game"],
+      href: "/project/goapai",
     },
     {
       image: "/snowdown/titleScreen.jpg",
@@ -185,6 +191,7 @@ const FilteredProjects = () => {
         },
       ],
       hiddenTags: ["Completed", "Game"],
+      href: "/project/snowdown",
     },
     {
       image: "/pastyprotector/titleScreen.png",
@@ -205,6 +212,7 @@ const FilteredProjects = () => {
         },
       ],
       hiddenTags: ["Completed", "Game"],
+      href: "/project/pastyprotector",
     },
   ];
 

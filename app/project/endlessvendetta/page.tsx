@@ -2,15 +2,21 @@ import React from "react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Endless Vendetta Project",
+  title: "Project | Endless Vendetta",
   description:
     "Crime, violence and betrayal runs rampant throughout the solar system. Take on bounties as you hunt to kill the one who murdered your family, and left you for dead.",
   openGraph: {
     type: "website",
     url: "https://philipwhite.dev/endlessvendetta",
-    title: "Endless Vendetta Project",
+    title: "Project | Endless Vendetta",
     description:
       "Crime, violence and betrayal runs rampant throughout the solar system. Take on bounties as you hunt to kill the one who murdered your family, and left you for dead.",
+    images: [
+      {
+        url: "https://test.philipwhite.dev/endlessvendetta/EndlessVendettaFullPage.webp",
+        alt: "Project | Endless Vendetta",
+      },
+    ],
   },
 };
 

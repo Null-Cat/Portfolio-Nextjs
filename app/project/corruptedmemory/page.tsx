@@ -3,6 +3,7 @@ import {
   CppSVG,
   GiteaSVG,
   JavaScriptSVG,
+  NodejsSVG,
   UnrealEngineSVG,
   WindowsSVG,
 } from "@/app/components/SVGs";
@@ -91,6 +92,16 @@ const CorruptedMemoryProject = () => {
               startContent={<UnrealEngineSVG />}
             >
               Unreal Engine 5.1
+            </Chip>
+            <Chip
+              size="sm"
+              radius="sm"
+              variant="shadow"
+              className="flex gap-1"
+              color={"primary"}
+              startContent={<NodejsSVG />}
+            >
+              Node.js
             </Chip>
             <Chip
               size="sm"

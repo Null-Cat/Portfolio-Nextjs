@@ -1,5 +1,5 @@
 import KrakenGame from "@/app/components/KrakenGame";
-import { GiteaSVG, JavaScriptSVG } from "@/app/components/SVGs";
+import { JavaScriptSVG, NodejsSVG } from "@/app/components/SVGs";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Chip, Image, Link, Spacer } from "@heroui/react";
@@ -48,6 +48,16 @@ const TheKrakenSummerSplashProject = () => {
               startContent={<p>🔫</p>}
             >
               Phaser 3
+            </Chip>
+            <Chip
+              size="sm"
+              radius="sm"
+              variant="shadow"
+              className="flex gap-1"
+              color={"primary"}
+              startContent={<NodejsSVG />}
+            >
+              Node.js
             </Chip>
             <Chip
               size="sm"

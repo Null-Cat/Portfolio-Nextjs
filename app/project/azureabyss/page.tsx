@@ -36,59 +36,59 @@ const AzureAbyssProject = () => {
       <ProjectCarousel
         images={[
           {
-            image: "/azureabyss/Screenshot0.png",
+            image: "/azureabyss/azureabyss0.png",
             alt: "Your Predecessor",
           },
           {
-            image: "/azureabyss/Screenshot1.png",
+            image: "/azureabyss/azureabyss1.png",
             alt: "The Abyss",
           },
           {
-            image: "/azureabyss/Screenshot2.png",
+            image: "/azureabyss/azureabyss2.png",
             alt: "Merchant Sister",
           },
           {
-            image: "/azureabyss/Screenshot3.png",
+            image: "/azureabyss/azureabyss3.png",
             alt: "Feral Goat Cave",
           },
           {
-            image: "/azureabyss/Screenshot4.png",
+            image: "/azureabyss/azureabyss4.png",
             alt: "Merchant Entrance",
           },
           {
-            image: "/azureabyss/Screenshot5.png",
+            image: "/azureabyss/azureabyss5.png",
             alt: "Crystal Tunnel",
           },
           {
-            image: "/azureabyss/Screenshot6.png",
+            image: "/azureabyss/azureabyss6.png",
             alt: "---- Entrance",
           },
           {
-            image: "/azureabyss/Screenshot7.png",
+            image: "/azureabyss/azureabyss7.png",
             alt: "...",
           },
           {
-            image: "/azureabyss/Screenshot8.png",
+            image: "/azureabyss/azureabyss8.png",
             alt: "Combat",
           },
           {
-            image: "/azureabyss/Screenshot9.png",
+            image: "/azureabyss/azureabyss9.png",
             alt: "Enter",
           },
           {
-            image: "/azureabyss/Screenshot12.png",
+            image: "/azureabyss/azureabyss12.png",
             alt: "Merchant Sister",
           },
           {
-            image: "/azureabyss/Screenshot10.png",
+            image: "/azureabyss/azureabyss10.png",
             alt: "Merchant",
           },
           {
-            image: "/azureabyss/Screenshot11.png",
+            image: "/azureabyss/azureabyss11.png",
             alt: "Healing Jelly",
           },
           {
-            image: "/azureabyss/Screenshot13.png",
+            image: "/azureabyss/azureabyss13.png",
             alt: "Feral Goat Cave",
           },
         ]}

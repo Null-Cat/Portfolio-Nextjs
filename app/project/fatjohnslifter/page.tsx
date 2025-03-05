@@ -5,7 +5,7 @@ import {
   UnrealEngineSVG,
   WindowsSVG,
 } from "@/app/components/SVGs";
-import { Chip, Image, Link, Spacer } from "@heroui/react";
+import { Chip, Link, Spacer } from "@heroui/react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

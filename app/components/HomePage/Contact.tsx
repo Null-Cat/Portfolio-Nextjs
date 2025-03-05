@@ -4,11 +4,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import ContactForm from "./components/ContactForm";
+import Squares from "../ReactBits/Squares";
 
 const Contact = () => {
   return (
     <div id="Contact" className="h-[135svh] sm:h-svh">
       <div className="relative h-full w-full">
+        <Squares
+          speed={0.5}
+          squareSize={50}
+          direction="up"
+          borderColor="#333"
+          hoverFillColor="#222"
+        />
         <div className="absolute inset-0 flex flex-col px-4 pt-20">
           <FadeContent
             className="h-fit"

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
 };
 
-const EndlessVendettaProject = () => {
+const AzureAbyssProject = () => {
   return (
     <>
       <h1 className="flex justify-center sm:text-5xl text-4xl text-center pt-20 pb-4">
@@ -307,4 +307,4 @@ const EndlessVendettaProject = () => {
   );
 };
 
-export default EndlessVendettaProject;
+export default AzureAbyssProject;

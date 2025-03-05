@@ -36,90 +36,89 @@ const EndlessVendettaProject = () => {
       <ProjectCarousel
         images={[
           {
-            image:
-              "https://philipwhite.dev/endlessvendetta/EndlessVendettaFullPage.webp",
+            image: "/endlessvendetta/EndlessVendettaFullPage.webp",
             alt: "Endless Vendetta Promotional Image",
           },
           {
-            image: "https://philipwhite.dev/endlessvendetta/Screenshot0.webp",
+            image: "/endlessvendetta/Screenshot0.webp",
             alt: "Main Menu",
           },
           {
-            image: "https://philipwhite.dev/endlessvendetta/Screenshot1.webp",
+            image: "/endlessvendetta/Screenshot1.webp",
             alt: "First Mayor Interaction",
           },
           {
-            image: "https://philipwhite.dev/endlessvendetta/Screenshot2.webp",
+            image: "/endlessvendetta/Screenshot2.webp",
             alt: "Mayor Dialogue",
           },
           {
-            image: "https://philipwhite.dev/endlessvendetta/Screenshot3.webp",
+            image: "/endlessvendetta/Screenshot3.webp",
             alt: "Mayor Dialogue Choices",
           },
           {
-            image: "https://philipwhite.dev/endlessvendetta/Screenshot4.webp",
+            image: "/endlessvendetta/Screenshot4.webp",
             alt: "Waypoint",
           },
           {
-            image: "https://philipwhite.dev/endlessvendetta/Screenshot5.webp",
+            image: "/endlessvendetta/Screenshot5.webp",
             alt: "Shooting Gallery",
           },
           {
-            image: "https://philipwhite.dev/endlessvendetta/Screenshot6.webp",
+            image: "/endlessvendetta/Screenshot6.webp",
             alt: "Combat Gadget",
           },
           {
-            image: "https://philipwhite.dev/endlessvendetta/Screenshot7.webp",
+            image: "/endlessvendetta/Screenshot7.webp",
             alt: "Using Combat Gadget",
           },
           {
-            image: "https://philipwhite.dev/endlessvendetta/Screenshot8.webp",
+            image: "/endlessvendetta/Screenshot8.webp",
             alt: "Recon Gadget",
           },
           {
-            image: "https://philipwhite.dev/endlessvendetta/Screenshot9.webp",
+            image: "/endlessvendetta/Screenshot9.webp",
             alt: "Using Recon Gadget",
           },
           {
-            image: "https://philipwhite.dev/endlessvendetta/Screenshot12.webp",
+            image: "/endlessvendetta/Screenshot12.webp",
             alt: "New Miami",
           },
           {
-            image: "https://philipwhite.dev/endlessvendetta/Screenshot10.webp",
+            image: "/endlessvendetta/Screenshot10.webp",
             alt: "New Miami",
           },
           {
-            image: "https://philipwhite.dev/endlessvendetta/Screenshot11.webp",
+            image: "/endlessvendetta/Screenshot11.webp",
             alt: "New Miami",
           },
           {
-            image: "https://philipwhite.dev/endlessvendetta/Screenshot13.webp",
+            image: "/endlessvendetta/Screenshot13.webp",
             alt: "New Miami Park",
           },
           {
-            image: "https://philipwhite.dev/endlessvendetta/Screenshot14.webp",
+            image: "/endlessvendetta/Screenshot14.webp",
             alt: "Side Bounty",
           },
           {
-            image: "https://philipwhite.dev/endlessvendetta/Screenshot15.webp",
+            image: "/endlessvendetta/Screenshot15.webp",
             alt: "Weapon Attachment Workbench",
           },
           {
-            image: "https://philipwhite.dev/endlessvendetta/Screenshot16.webp",
+            image: "/endlessvendetta/Screenshot16.webp",
             alt: "Enemy Wave",
           },
           {
-            image: "https://philipwhite.dev/endlessvendetta/Screenshot17.webp",
+            image: "/endlessvendetta/Screenshot17.webp",
             alt: "Dinning Room",
           },
           {
-            image: "https://philipwhite.dev/endlessvendetta/Screenshot18.webp",
+            image: "/endlessvendetta/Screenshot18.webp",
             alt: "Getting Damaged",
           },
         ]}
       />
       <div className="flex sm:justify-center flex-wrap gap-8 p-4">
-        <div className="sm:place-self-end">
+        <div>
           <h2 className="sm:text-4xl text-3xl sm:text-right">
             Project Features
           </h2>
@@ -194,7 +193,7 @@ const EndlessVendettaProject = () => {
           isExternal
           showAnchorIcon
           underline="always"
-          href="https://gitea.philipwhite.dev/Philip/EndlessVendetta"
+          href="https://gitea.philipwhite.dev/Philip/AzureAbyss"
         >
           <GiteaSVG /> <Spacer />
           Game Project Files
@@ -222,6 +221,7 @@ const EndlessVendettaProject = () => {
           allowFullScreen
         />
       </div>
+
       <div className="flex flex-col items-center gap-4 py-8">
         <h2 className="sm:text-4xl text-3xl">Pitch</h2>
         <iframe

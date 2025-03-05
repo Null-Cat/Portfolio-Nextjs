@@ -173,27 +173,6 @@ const FilteredProjects = () => {
       href: "/project/goapai",
     },
     {
-      image: "/snowdown/titleScreen.jpg",
-      title: "Snowdown",
-      description: `A 1st year Uni Project split screen co-op projectile combat game focusing on controller support.`,
-      tags: [
-        {
-          name: "Unity",
-          colour: "primary",
-          icon: <UnitySVG />,
-          filterKey: "Unity",
-        },
-        {
-          name: "C#",
-          colour: "secondary",
-          icon: <CSharpSVG />,
-          filterKey: "C#",
-        },
-      ],
-      hiddenTags: ["Completed", "Game"],
-      href: "/project/snowdown",
-    },
-    {
       image: "/pastyprotector/titleScreen.png",
       title: "Pasty Protector",
       description: `A 1st year Uni Project for a 2D arcade shooter game focusing on global leaderboards and SQL Databases.`,

@@ -132,12 +132,12 @@ const EndlessVendettaProject = () => {
           },
         ]}
       />
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 p-4">
-        <div className="sm:place-self-end">
+      <div className="flex justify-center flex-wrap gap-8 p-4">
+        <div className="sm:place-self-end  w-fit">
           <h2 className="sm:text-3xl text-2xl sm:text-right">
             Project Features
           </h2>
-          <div className="flex flex-wrap gap-1 py-3 w-full">
+          <div className="flex flex-wrap justify-end gap-1 py-3">
             <Chip
               size="sm"
               radius="sm"
@@ -184,7 +184,7 @@ const EndlessVendettaProject = () => {
         </div>
         <div>
           <h2 className="sm:text-3xl text-2xl">Description</h2>
-          <p>
+          <p className="max-w-prose">
             <br />
             Crime, violence and betrayal runs rampant throughout the solar
             system. Take on bounties as you hunt to kill the one who murdered
@@ -201,16 +201,37 @@ const EndlessVendettaProject = () => {
             6 months.
           </p>
         </div>
-        <div className="sm:col-span-2 col-span-1">
-          <div className="flex justify-center">
-            <iframe
-              frameBorder="0"
-              src="https://itch.io/embed/2695551?dark=true"
-              width="552"
-              height="167"
-            />
-          </div>
-        </div>
+      </div>
+      <div className="flex justify-center">
+        <iframe
+          frameBorder="0"
+          src="https://itch.io/embed/2695551?dark=true"
+          width="552"
+          height="167"
+        />
+      </div>
+      <div className="flex flex-col items-center gap-4 py-8">
+        <h2 className="sm:text-3xl text-2xl">Trailer</h2>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/J-6rMWNq-gQ?si=za4ALm9AQ_ZrnSVx"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        />
+      </div>
+      <div className="flex flex-col items-center gap-4 py-8">
+        <h2 className="sm:text-3xl text-2xl">Pitch</h2>
+        <iframe
+          src="https://docs.google.com/presentation/d/e/2PACX-1vQdyX2L3K3UizzR-If9guZ7OStsDa-fHCQeVhxYy8lLyMazTUfbzX2BDpwGDEnBR3T5ix002J7T8AoU/embed?start=false&loop=true&delayms=5000"
+          frameBorder="0"
+          width="960"
+          height="569"
+          allowFullScreen
+        />
       </div>
     </>
   );

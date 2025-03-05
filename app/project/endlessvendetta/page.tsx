@@ -193,6 +193,7 @@ const EndlessVendettaProject = () => {
         <Link
           isExternal
           showAnchorIcon
+          underline="always"
           href="https://gitea.philipwhite.dev/Philip/EndlessVendetta"
         >
           <GiteaSVG /> <Spacer />

@@ -5,7 +5,7 @@ import {
   faPaperPlane,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Form, Input, Textarea } from "@heroui/react";
+import { addToast, Button, Form, Input, Textarea } from "@heroui/react";
 import { useState } from "react";
 
 const ContactForm = () => {
@@ -32,16 +32,39 @@ const ContactForm = () => {
               "Message Sent Successfully! Thank you for reaching out!"
             );
             setButtonColor("success");
+            addToast({
+              title: "Message Sent!",
+              description: "Thank you for reaching out!",
+              color: "success",
+              timeout: 5000,
+              shouldShowTimeoutProgess: true,
+            });
           } else if (contactFormRequest.status === 413) {
             setRequestResponse(
               "Message too long! Ensure your message is less than 1000 characters"
             );
             setButtonColor("danger");
+            addToast({
+              title: "Message Failed to Send!",
+              description:
+                "Message too long! Ensure your message is less than 1000 characters",
+              color: "danger",
+              timeout: 5000,
+              shouldShowTimeoutProgess: true,
+            });
           } else {
             setRequestResponse(
               "Message Failed to Send! Please send me an email and I will get back to you as soon as possible."
             );
             setButtonColor("danger");
+            addToast({
+              title: "Message Failed to Send!",
+              description:
+                "Please send me an email and I will get back to you as soon as possible.",
+              color: "danger",
+              timeout: 5000,
+              shouldShowTimeoutProgess: true,
+            });
           }
         };
         contactFormRequest.send(JSON.stringify(data));

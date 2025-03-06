@@ -18,7 +18,7 @@ export default async function handler(
   if (
     !(req.body.name && req.body.email && req.body.subject && req.body.message)
   ) {
-    res.send(400);
+    res.status(400).json(400);
     return;
   }
 
@@ -28,7 +28,7 @@ export default async function handler(
     req.body.subject.length > 100 ||
     req.body.message.length > 1000
   ) {
-    res.send(413);
+    res.status(413).json(413);
     return;
   }
 
@@ -48,9 +48,9 @@ export default async function handler(
 
   nodeMailerTransporter.sendMail(email, (err) => {
     if (err) {
-      res.send(500);
+      res.status(500).json(500);
     } else {
-      res.send(200);
+      res.status(200).json(200);
     }
   });
 }

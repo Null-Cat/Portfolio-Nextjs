@@ -33,7 +33,7 @@ const ProjectCard = ({
           width={270}
           height={200}
         />
-        <h3 className="font-bold text-lg pt-1">{title}</h3>
+        <h2 className="font-bold text-lg pt-1">{title}</h2>
       </CardHeader>
       <CardBody className="overflow-visible py-0">
         <div className="flex justify-center gap-1 pb-3 w-full">

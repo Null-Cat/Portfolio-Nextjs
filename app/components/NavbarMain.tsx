@@ -31,20 +31,28 @@ const NavbarMain = () => {
       maxWidth="full"
     >
       <NavbarContent className="sm:hidden" justify="start">
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-        />
+        <NavbarItem className="">
+          <NavbarMenuToggle
+            className="w-4 h-8"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          />
+        </NavbarItem>
       </NavbarContent>
 
       <NavbarContent
         className="sm:hidden absolute inset-0 flex flex-col items-center pointer-events-none"
         justify="center"
       >
-        <NavbarBrand>
-          <Link href="/" className="text-inherit text-2xl pointer-events-auto">
-            Philip White
-          </Link>
-        </NavbarBrand>
+        <NavbarItem>
+          <NavbarBrand>
+            <Link
+              href="/"
+              className="text-inherit text-2xl pointer-events-auto"
+            >
+              Philip White
+            </Link>
+          </NavbarBrand>
+        </NavbarItem>
       </NavbarContent>
 
       <NavbarContent
@@ -79,11 +87,16 @@ const NavbarMain = () => {
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="start">
-        <NavbarBrand>
-          <Link href="/" className="text-inherit text-2xl pointer-events-auto">
-            Philip White
-          </Link>
-        </NavbarBrand>
+        <NavbarItem>
+          <NavbarBrand>
+            <Link
+              href="/"
+              className="text-inherit text-2xl pointer-events-auto"
+            >
+              Philip White
+            </Link>
+          </NavbarBrand>
+        </NavbarItem>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-2" justify="end">
@@ -116,8 +129,6 @@ const NavbarMain = () => {
           </Link>
         </NavbarItem>
       </NavbarContent>
-
-      <NavbarContent className="sm:hidden flex" justify="end"></NavbarContent>
 
       <NavbarMenu>
         <NavbarMenuItem key="navbarHome">

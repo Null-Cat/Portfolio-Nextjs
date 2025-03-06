@@ -48,7 +48,7 @@ export const metadata: Metadata = {
       "I'm a Web & Game Developer with proficient experience in game engines such as Unreal Engine and Unity using languages such as C++ and C# as well as Web Technologies such as Node.js, Next.js, React, Docker, PM2 and Nginx. I strive to create visually compelling, sophisticated, and efficient software. I'm always learning new methods to optimize and produce more efficient code.",
     images: [
       {
-        url: "https://test.philipwhite.dev/OGImage.png",
+        url: "https://philipwhite.dev/OGImage.png",
         alt: "Philip White Portfolio",
       },
     ],

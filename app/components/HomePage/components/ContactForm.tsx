@@ -1,13 +1,20 @@
 "use client";
-import { faEnvelope, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faEnvelope,
+  faPaperPlane,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Form, Input, Textarea } from "@heroui/react";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const ContactForm = () => {
   const [hasMessageSubmitted, setHasMessageSubmitted] = useState(false);
   const [sendingMessage, setSendingMessage] = useState(false);
   const [requestResponse, setRequestResponse] = useState("");
+  const [buttonColor, setButtonColor] = useState<
+    "primary" | "default" | "secondary" | "success" | "warning" | "danger"
+  >("primary");
   return (
     <Form
       className="flex flex-col justify-center items-center h-full"
@@ -16,30 +23,28 @@ const ContactForm = () => {
         setHasMessageSubmitted(true);
         setSendingMessage(true);
         const data = Object.fromEntries(new FormData(e.currentTarget));
-        fetch("/api/contact", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        })
-          .then((response) => {
-            if (response.status === 200) {
-              setRequestResponse("Message Sent!");
-            } else if (response.status === 413) {
-              setRequestResponse(
-                "Message too long! Ensure your message is less than 1000 characters"
-              );
-            } else {
-              setRequestResponse("Message Failed to Send");
-            }
-          })
-          .catch(() => {
-            setRequestResponse("Message Failed to Send");
-          })
-          .finally(() => {
-            setSendingMessage(false);
-          });
+        const contactFormRequest = new XMLHttpRequest();
+        contactFormRequest.open("POST", "/api/contact", true);
+        contactFormRequest.setRequestHeader("Content-Type", "application/json");
+        contactFormRequest.onload = () => {
+          if (contactFormRequest.status === 200) {
+            setRequestResponse(
+              "Message Sent Successfully! Thank you for reaching out!"
+            );
+            setButtonColor("success");
+          } else if (contactFormRequest.status === 413) {
+            setRequestResponse(
+              "Message too long! Ensure your message is less than 1000 characters"
+            );
+            setButtonColor("danger");
+          } else {
+            setRequestResponse(
+              "Message Failed to Send! Please send me an email and I will get back to you as soon as possible."
+            );
+            setButtonColor("danger");
+          }
+        };
+        contactFormRequest.send(JSON.stringify(data));
       }}
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border border-default-100 backdrop-blur p-4 rounded-lg lg:w-[90%] w-full">
@@ -99,19 +104,25 @@ const ContactForm = () => {
         />
         <Button
           className="sm:col-span-2"
-          color="primary"
+          color={buttonColor}
           variant="shadow"
           type="submit"
           endContent={
-            hasMessageSubmitted ? null : <FontAwesomeIcon icon={faPaperPlane} />
+            hasMessageSubmitted ? (
+              buttonColor == "success" ? (
+                <FontAwesomeIcon icon={faCheck} />
+              ) : null
+            ) : (
+              <FontAwesomeIcon icon={faPaperPlane} />
+            )
           }
           isDisabled={hasMessageSubmitted}
           isLoading={sendingMessage && !requestResponse}
         >
-          {sendingMessage
-            ? "Sending Message..."
-            : requestResponse
+          {requestResponse
             ? requestResponse
+            : sendingMessage
+            ? "Sending Message..."
             : "Send Message"}
         </Button>
       </div>

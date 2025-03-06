@@ -29,7 +29,7 @@ const ContactForm = () => {
         contactFormRequest.onload = () => {
           if (contactFormRequest.status === 200) {
             setRequestResponse(
-              "Message Sent Successfully! Thank you for reaching out!"
+              "Message Sent Successfully!"
             );
             setButtonColor("success");
             addToast({
@@ -41,7 +41,7 @@ const ContactForm = () => {
             });
           } else if (contactFormRequest.status === 413) {
             setRequestResponse(
-              "Message too long! Ensure your message is less than 1000 characters"
+              "Message too long!"
             );
             setButtonColor("danger");
             addToast({

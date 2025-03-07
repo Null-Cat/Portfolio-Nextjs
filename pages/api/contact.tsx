@@ -15,9 +15,27 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const timestamp = new Date().toISOString();
+
   if (
     !(req.body.name && req.body.email && req.body.subject && req.body.message)
   ) {
+    console.error(
+      `[${timestamp}] 400 Bad Request: Missing required fields for contact form.`
+    );
+    res.status(400).json(400);
+    return;
+  }
+
+  //Test if the email is valid
+  if (
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(
+      req.body.email
+    ) === false
+  ) {
+    console.error(
+      `[${timestamp}] 400 Bad Request: Invalid email address for contact form.`
+    );
     res.status(400).json(400);
     return;
   }
@@ -28,6 +46,9 @@ export default async function handler(
     req.body.subject.length > 100 ||
     req.body.message.length > 1000
   ) {
+    console.error(
+      `[${timestamp}] 413 Payload Too Large: One or more fields exceed the maximum character limit for the contact form.`
+    );
     res.status(413).json(413);
     return;
   }
@@ -39,21 +60,42 @@ export default async function handler(
     subject: `Portfolio Message: ${req.body.subject}`,
     text: `Name: ${req.body.name}\nEmail: ${req.body.email}\nMessage:\n${req.body.message}`,
     html: contactEmailTemplateHTML(
-      req.body.name,
-      req.body.email,
-      req.body.subject,
-      req.body.message
+      escapeHTML(req.body.name),
+      escapeHTML(req.body.email),
+      escapeHTML(req.body.subject),
+      escapeHTML(req.body.message)
     ),
   };
 
   nodeMailerTransporter.sendMail(email, (err) => {
     if (err) {
+      console.error(`[${timestamp}] 500 Internal Server Error: ${err.message}`);
       res.status(500).json(500);
     } else {
+      console.log(`[${timestamp}] 200 OK: Contact email sent successfully.`);
       res.status(200).json(200);
     }
   });
 }
+
+/**
+ * Escapes special HTML characters in a string to their corresponding HTML entities.
+ *
+ * @param str - The input string containing HTML characters to be escaped.
+ * @returns The escaped string with HTML entities.
+ */
+const escapeHTML = (str: string) =>
+  str.replace(
+    /[&<>'"]/g,
+    (tag) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "'": "&#39;",
+        '"': "&quot;",
+      }[tag] || "")
+  );
 
 /**
  * Generates an HTML template for a contact email.

@@ -23,7 +23,9 @@ export default async function handler(
     console.error(
       `[${timestamp}] 400 Bad Request: Missing required fields for contact form.`
     );
-    res.status(400).json(400);
+    res
+      .status(400)
+      .json({ error: "Missing required fields for contact form." });
     return;
   }
 
@@ -36,7 +38,7 @@ export default async function handler(
     console.error(
       `[${timestamp}] 400 Bad Request: Invalid email address for contact form.`
     );
-    res.status(400).json(400);
+    res.status(400).json({ error: "Invalid email address for contact form." });
     return;
   }
 
@@ -49,7 +51,10 @@ export default async function handler(
     console.error(
       `[${timestamp}] 413 Payload Too Large: One or more fields exceed the maximum character limit for the contact form.`
     );
-    res.status(413).json(413);
+    res.status(413).json({
+      error:
+        "One or more fields exceed the maximum character limit for the contact form.",
+    });
     return;
   }
 
@@ -70,10 +75,10 @@ export default async function handler(
   nodeMailerTransporter.sendMail(email, (err) => {
     if (err) {
       console.error(`[${timestamp}] 500 Internal Server Error: ${err.message}`);
-      res.status(500).json(500);
+      res.status(500).json({ error: "Internal Server Error" });
     } else {
       console.log(`[${timestamp}] 200 OK: Contact email sent successfully.`);
-      res.status(200).json(200);
+      res.status(200).json({ message: "Contact email sent successfully." });
     }
   });
 }

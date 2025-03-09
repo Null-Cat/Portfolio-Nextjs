@@ -28,9 +28,7 @@ const ContactForm = () => {
         contactFormRequest.setRequestHeader("Content-Type", "application/json");
         contactFormRequest.onload = () => {
           if (contactFormRequest.status === 200) {
-            setRequestResponse(
-              "Message Sent Successfully!"
-            );
+            setRequestResponse("Message Sent Successfully!");
             setButtonColor("success");
             addToast({
               title: "Message Sent!",
@@ -40,9 +38,7 @@ const ContactForm = () => {
               shouldShowTimeoutProgess: true,
             });
           } else if (contactFormRequest.status === 413) {
-            setRequestResponse(
-              "Message too long!"
-            );
+            setRequestResponse("Message too long!");
             setButtonColor("danger");
             addToast({
               title: "Message Failed to Send!",
@@ -53,9 +49,7 @@ const ContactForm = () => {
               shouldShowTimeoutProgess: true,
             });
           } else {
-            setRequestResponse(
-              "Message Failed to Send! Please send me an email and I will get back to you as soon as possible."
-            );
+            setRequestResponse("Failed to Send :( Reach Me at|philip@philipwhite.dev");
             setButtonColor("danger");
             addToast({
               title: "Message Failed to Send!",
@@ -142,11 +136,17 @@ const ContactForm = () => {
           isDisabled={hasMessageSubmitted}
           isLoading={sendingMessage && !requestResponse}
         >
-          {requestResponse
-            ? requestResponse
-            : sendingMessage
-            ? "Sending Message..."
-            : "Send Message"}
+          {requestResponse ? (
+            <div className="flex flex-col">
+              {requestResponse.split("|").map((line, index) => (
+                <p key={index}>{line}</p>
+              ))}
+            </div>
+          ) : sendingMessage ? (
+            "Sending Message..."
+          ) : (
+            "Send Message"
+          )}
         </Button>
       </div>
     </Form>

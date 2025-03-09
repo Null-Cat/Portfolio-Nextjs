@@ -31,7 +31,7 @@ const NavbarMain = () => {
       maxWidth="full"
     >
       <NavbarContent className="sm:hidden" justify="start">
-        <NavbarItem className="">
+        <NavbarItem>
           <NavbarMenuToggle
             className="w-4 h-8"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -48,6 +48,7 @@ const NavbarMain = () => {
             <Link
               href="/"
               className="text-inherit text-2xl pointer-events-auto"
+              aria-label="Philip White Portfolio"
             >
               Philip White
             </Link>
@@ -60,27 +61,39 @@ const NavbarMain = () => {
         justify="center"
       >
         <NavbarItem>
-          <Link color="foreground" href="/#Home">
+          <Link color="foreground" href="/#Home" aria-label="Home Section">
             Home
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="/#About">
+          <Link color="foreground" href="/#About" aria-label="About Section">
             About
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="/#Projects">
+          <Link
+            color="foreground"
+            href="/#Projects"
+            aria-label="Projects Section"
+          >
             Projects
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="/#Contact">
+          <Link
+            color="foreground"
+            href="/#Contact"
+            aria-label="Contact Section"
+          >
             Contact
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="/PhilipWhiteCVGame.pdf">
+          <Link
+            color="foreground"
+            href="/PhilipWhiteCVGame.pdf"
+            aria-label="Curriculum Vitae CV"
+          >
             CV
           </Link>
         </NavbarItem>
@@ -92,6 +105,7 @@ const NavbarMain = () => {
             <Link
               href="/"
               className="text-inherit text-2xl pointer-events-auto"
+              aria-label="Philip White Portfolio"
             >
               Philip White
             </Link>
@@ -101,7 +115,11 @@ const NavbarMain = () => {
 
       <NavbarContent className="hidden sm:flex gap-2" justify="end">
         <NavbarItem className="flex justify-center">
-          <Link href="mailto:philip@philipwhite.dev" color="foreground">
+          <Link
+            href="mailto:philip@philipwhite.dev"
+            color="foreground"
+            aria-label="Philip White's Email"
+          >
             <FontAwesomeIcon icon={faEnvelope} />
           </Link>
         </NavbarItem>
@@ -109,22 +127,35 @@ const NavbarMain = () => {
           <Link
             href="https://www.linkedin.com/in/philip-white-dev/"
             color="foreground"
+            aria-label="Philip White's LinkedIn"
           >
             <FontAwesomeIcon icon={faLinkedinIn} />
           </Link>
         </NavbarItem>
         <NavbarItem className="flex justify-center">
-          <Link href="https://github.com/Null-Cat" color="foreground">
+          <Link
+            href="https://github.com/Null-Cat"
+            color="foreground"
+            aria-label="Philip White's Github"
+          >
             <FontAwesomeIcon icon={faGithub} />
           </Link>
         </NavbarItem>
         <NavbarItem className="flex justify-center">
-          <Link href="https://gitea.philipwhite.dev/" color="foreground">
+          <Link
+            href="https://gitea.philipwhite.dev/"
+            color="foreground"
+            aria-label="Philip White's Gitea"
+          >
             <GiteaSVG />
           </Link>
         </NavbarItem>
         <NavbarItem className="flex justify-center">
-          <Link href="https://null-cat.itch.io/" color="foreground">
+          <Link
+            href="https://null-cat.itch.io/"
+            color="foreground"
+            aria-label="Philip White's Itch.io"
+          >
             <FontAwesomeIcon icon={faItchIo} />
           </Link>
         </NavbarItem>
@@ -138,6 +169,7 @@ const NavbarMain = () => {
             href="/#Home"
             size="lg"
             onClickCapture={() => setIsMenuOpen(false)}
+            aria-label="Home Section"
           >
             Home
           </Link>
@@ -149,6 +181,7 @@ const NavbarMain = () => {
             href="/#About"
             size="lg"
             onClickCapture={() => setIsMenuOpen(false)}
+            aria-label="About Section"
           >
             About
           </Link>
@@ -160,6 +193,7 @@ const NavbarMain = () => {
             href="/#Projects"
             size="lg"
             onClickCapture={() => setIsMenuOpen(false)}
+            aria-label="Projects Section"
           >
             Projects
           </Link>
@@ -171,6 +205,7 @@ const NavbarMain = () => {
             href="/#Contact"
             size="lg"
             onClickCapture={() => setIsMenuOpen(false)}
+            aria-label="Contact Section"
           >
             Contact
           </Link>
@@ -182,28 +217,46 @@ const NavbarMain = () => {
             href="https://philipwhite.dev/PhilipWhiteCVGame.pdf"
             size="lg"
             onClickCapture={() => setIsMenuOpen(false)}
+            aria-label="Curriculum Vitae CV"
           >
             CV
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem key="navbarSocial">
           <div className="flex justify-start gap-4 pt-4">
-            <Link href="mailto:philip@philipwhite.dev" color="foreground">
+            <Link
+              href="mailto:philip@philipwhite.dev"
+              color="foreground"
+              aria-label="Philip White's Email"
+            >
               <FontAwesomeIcon icon={faEnvelope} />
             </Link>
             <Link
               href="https://www.linkedin.com/in/philip-white-dev/"
               color="foreground"
+              aria-label="Philip White's LinkedIn"
             >
               <FontAwesomeIcon icon={faLinkedinIn} />
             </Link>
-            <Link href="https://github.com/Null-Cat" color="foreground">
+            <Link
+              href="https://github.com/Null-Cat"
+              color="foreground"
+              aria-label="Philip White's Github"
+            >
               <FontAwesomeIcon icon={faGithub} />
             </Link>
-            <Link href="https://gitea.philipwhite.dev/" color="foreground">
+            <Link
+              href="https://gitea.philipwhite.dev/"
+              color="foreground"
+              aria-label="Philip White's Gitea"
+            >
               <GiteaSVG />
             </Link>
-            <Link href="https://null-cat.itch.io/" color="foreground">
+            <Link
+              href="https://null-cat.itch.io/"
+              color="foreground"
+              aria-label="Philip White's Itch.io"
+            >
               <FontAwesomeIcon icon={faItchIo} />
             </Link>
           </div>

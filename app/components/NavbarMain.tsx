@@ -91,7 +91,7 @@ const NavbarMain = () => {
         <NavbarItem>
           <Link
             color="foreground"
-            href="/PhilipWhiteCVGame.pdf"
+            href="/PhilipWhiteCV.pdf"
             aria-label="Curriculum Vitae CV"
           >
             CV
@@ -214,7 +214,7 @@ const NavbarMain = () => {
           <Link
             className="w-full"
             color={"foreground"}
-            href="https://philipwhite.dev/PhilipWhiteCVGame.pdf"
+            href="https://philipwhite.dev/PhilipWhiteCV.pdf"
             size="lg"
             onClickCapture={() => setIsMenuOpen(false)}
             aria-label="Curriculum Vitae CV"

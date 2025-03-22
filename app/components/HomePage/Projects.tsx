@@ -11,11 +11,11 @@ interface VisibleProjectTag {
 
 const Projects = () => {
   return (
-    <div id="Projects" className="sm:h-[111svh] h-[200svh]">
+    <div id="Projects" className="sm:h-[120svh] h-[200svh]">
       <div className="relative h-full w-full">
         <Particles
           particleColors={["#ffffff", "#ffffff"]}
-          particleCount={200}
+          particleCount={70}
           particleSpread={10}
           speed={0.05}
           particleBaseSize={100}

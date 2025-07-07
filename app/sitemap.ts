@@ -9,6 +9,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: "https://philipwhite.dev/projects/wafflesudoku",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
       url: "https://philipwhite.dev/projects/endlessvendetta",
       lastModified: new Date(),
       changeFrequency: "weekly",

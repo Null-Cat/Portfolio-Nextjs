@@ -10,6 +10,8 @@ import {
   CSharpSVG,
   JavaScriptSVG,
   NodejsSVG,
+  ReactSVG,
+  TypeScriptSVG,
   UnitySVG,
   UnrealEngineSVG,
 } from "../../SVGs";
@@ -25,6 +27,28 @@ interface Project {
 
 const FilteredProjects = () => {
   const projects: Project[] = [
+    {
+      image: "/wafflesudoku/waffleTitle.png",
+      title: "Waffle Sudoku",
+      description:
+        "A portfolio test submission, focusing on consistent gameplay, UI/UX, and responsive design.",
+      tags: [
+        {
+          name: "React",
+          colour: "primary",
+          icon: <ReactSVG />,
+          filterKey: "React",
+        },
+        {
+          name: "Typescript",
+          colour: "secondary",
+          icon: <TypeScriptSVG />,
+          filterKey: "TypeScript",
+        },
+      ],
+      hiddenTags: ["Completed", "Web", "Game"],
+      href: "/project/wafflesudoku",
+    },
     {
       image: "/endlessvendetta/EndlessVendettaCardTitle.webp",
       title: "Endless Vendetta",

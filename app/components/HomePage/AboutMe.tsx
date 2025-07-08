@@ -27,12 +27,46 @@ const AboutMe = () => {
               About Me
             </h1>
           </FadeContent>
-          <div className="flex flex-col items-center justify-center w-full grow">
+          <div className="flex flex-col items-center justify-center w-full grow gap-4">
             <FadeContent
               className="h-fit w-full flex items-center justify-center"
               blur={false}
               duration={1000}
               delay={500}
+              easing="ease-out"
+              initialOpacity={0}
+            >
+              <div className="flex items-center border border-default-100 px-2 py-4 rounded-lg backdrop-blur">
+                <div className="flex items-center space-x-4 px-1">
+                  <Image
+                    alt="Royal Yachting Association Logo"
+                    className="pointer-events-auto"
+                    src="/RYA.svg"
+                    width={60}
+                  />
+                  <Divider className="h-10" orientation="vertical" />
+                  <div className="flex flex-col">
+                    <h2 className="lg:text-3xl md:text-2xl text-base font-bold pointer-events-auto">
+                      Royal Yachting Association
+                    </h2>
+                    <p className="lg:text-lg md:text-base text-sm text-default-500 pointer-events-auto">
+                      2024 - Present
+                    </p>
+                  </div>
+                  <Divider className="h-10" orientation="vertical" />
+                  <div className="flex flex-col">
+                    <h2 className="lg:text-2xl md:text-xl text-base font-bold pointer-events-auto">
+                      Software Quality Assurance
+                    </h2>
+                  </div>
+                </div>
+              </div>
+            </FadeContent>
+            <FadeContent
+              className="h-fit w-full flex items-center justify-center"
+              blur={false}
+              duration={1000}
+              delay={550}
               easing="ease-out"
               initialOpacity={0}
             >

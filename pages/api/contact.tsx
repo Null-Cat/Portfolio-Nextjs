@@ -1,6 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer";
 import "../../envConfig.ts";
+const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY ?? "";
+const TURNSTILE_SECRET_KEY_DUMMY =
+  process.env.TURNSTILE_SECRET_KEY_DUMMY ??
+  "1x0000000000000000000000000000000AA";
 const nodeMailerTransporter = nodemailer.createTransport({
   host: "mail.spacemail.com",
   port: 465,
@@ -17,9 +21,94 @@ export default async function handler(
 ) {
   const timestamp = new Date().toISOString();
 
-  if (
-    !(req.body.name && req.body.email && req.body.subject && req.body.message)
-  ) {
+  if (req.method !== "POST") {
+    res.setHeader("Allow", "POST");
+    res.status(405).json({ error: "Method Not Allowed." });
+    return;
+  }
+
+  const requestHost = req.headers.host ?? "";
+  const isLocalhostRequest =
+    requestHost.startsWith("localhost") ||
+    requestHost.startsWith("127.0.0.1") ||
+    requestHost.startsWith("[::1]");
+  const activeTurnstileSecret = isLocalhostRequest
+    ? TURNSTILE_SECRET_KEY_DUMMY
+    : TURNSTILE_SECRET_KEY;
+
+  if (!activeTurnstileSecret) {
+    console.error(
+      `[${timestamp}] 500 Internal Server Error: Turnstile secret key is not configured.`
+    );
+    res.status(500).json({ error: "Verification is not configured." });
+    return;
+  }
+
+  const {
+    name,
+    email: emailAddress,
+    subject,
+    message,
+    turnstileToken,
+  } = req.body ?? {};
+
+  if (!turnstileToken) {
+    console.error(
+      `[${timestamp}] 400 Bad Request: Missing Turnstile token for contact form.`
+    );
+    res
+      .status(400)
+      .json({ error: "Please complete the verification challenge." });
+    return;
+  }
+
+  const remoteIp =
+    (req.headers["cf-connecting-ip"] as string | undefined) ??
+    (req.headers["x-forwarded-for"] as string | undefined)?.split(",")[0]?.trim() ??
+    req.socket.remoteAddress ??
+    undefined;
+
+  try {
+    const verificationResponse = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: { "content-type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          secret: activeTurnstileSecret,
+          response: turnstileToken,
+          ...(remoteIp ? { remoteip: remoteIp } : {}),
+        }),
+      }
+    );
+
+    const verificationData = (await verificationResponse.json()) as {
+      success: boolean;
+      [key: string]: unknown;
+    };
+
+    if (!verificationData.success) {
+      console.error(
+        `[${timestamp}] 400 Bad Request: Turnstile verification failed for contact form.`,
+        verificationData["error-codes"] ?? []
+      );
+      res
+        .status(400)
+        .json({ error: "Failed Turnstile verification. Please try again." });
+      return;
+    }
+  } catch (error) {
+    console.error(
+      `[${timestamp}] 500 Internal Server Error: Failed to verify Turnstile token.`,
+      error
+    );
+    res
+      .status(500)
+      .json({ error: "Verification service unavailable. Please try again." });
+    return;
+  }
+
+  if (!(name && emailAddress && subject && message)) {
     console.error(
       `[${timestamp}] 400 Bad Request: Missing required fields for contact form.`
     );
@@ -32,7 +121,7 @@ export default async function handler(
   //Test if the email is valid
   if (
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(
-      req.body.email
+      emailAddress
     ) === false
   ) {
     console.error(
@@ -43,10 +132,10 @@ export default async function handler(
   }
 
   if (
-    req.body.name.length > 100 ||
-    req.body.email.length > 100 ||
-    req.body.subject.length > 100 ||
-    req.body.message.length > 1000
+    name.length > 100 ||
+    emailAddress.length > 100 ||
+    subject.length > 100 ||
+    message.length > 1000
   ) {
     console.error(
       `[${timestamp}] 413 Payload Too Large: One or more fields exceed the maximum character limit for the contact form.`
@@ -58,29 +147,31 @@ export default async function handler(
     return;
   }
 
-  const email = {
-    from: `"${req.body.name}" <philip@philipwhite.dev>`,
+  const emailPayload = {
+    from: `"${name}" <philip@philipwhite.dev>`,
     to: "philip@philipwhite.dev",
-    replyTo: req.body.email,
-    subject: `Portfolio Message: ${req.body.subject}`,
-    text: `Name: ${req.body.name}\nEmail: ${req.body.email}\nMessage:\n${req.body.message}`,
+    replyTo: emailAddress,
+    subject: `Portfolio Message: ${subject}`,
+    text: `Name: ${name}\nEmail: ${emailAddress}\nMessage:\n${message}`,
     html: contactEmailTemplateHTML(
-      escapeHTML(req.body.name),
-      escapeHTML(req.body.email),
-      escapeHTML(req.body.subject),
-      escapeHTML(req.body.message)
+      escapeHTML(name),
+      escapeHTML(emailAddress),
+      escapeHTML(subject),
+      escapeHTML(message)
     ),
   };
 
-  nodeMailerTransporter.sendMail(email, (err) => {
-    if (err) {
-      console.error(`[${timestamp}] 500 Internal Server Error: ${err.message}`);
-      res.status(500).json({ error: "Internal Server Error" });
-    } else {
-      console.log(`[${timestamp}] 200 OK: Contact email sent successfully.`);
-      res.status(200).json({ message: "Contact email sent successfully." });
-    }
-  });
+  try {
+    await nodeMailerTransporter.sendMail(emailPayload);
+    console.log(`[${timestamp}] 200 OK: Contact email sent successfully.`);
+    res.status(200).json({ message: "Contact email sent successfully." });
+  } catch (err) {
+    const error = err as Error;
+    console.error(
+      `[${timestamp}] 500 Internal Server Error: ${error.message}`
+    );
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 }
 
 /**

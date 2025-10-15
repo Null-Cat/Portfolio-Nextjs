@@ -8,7 +8,7 @@ import Squares from "../ReactBits/Squares";
 
 const Contact = () => {
   return (
-    <div id="Contact" className="h-[135svh] sm:h-svh">
+    <div id="Contact" className="h-[140svh] sm:h-svh">
       <div className="relative h-full w-full">
         <Squares
           speed={0.5}

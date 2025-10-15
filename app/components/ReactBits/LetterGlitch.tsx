@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useMemo, useCallback } from 'react';
 
 interface LetterGlitchProps {
   glitchColors?: string[];
@@ -32,19 +32,20 @@ const LetterGlitch = ({
   const context = useRef<CanvasRenderingContext2D | null>(null);
   const lastGlitchTime = useRef(Date.now());
 
-  const lettersAndSymbols = Array.from(characters);
+  const lettersAndSymbols = useMemo(() => Array.from(characters), [characters]);
+  const glitchPalette = useMemo(() => glitchColors.slice(), [glitchColors]);
 
   const fontSize = 16;
   const charWidth = 10;
   const charHeight = 20;
 
-  const getRandomChar = () => {
+  const getRandomChar = useCallback(() => {
     return lettersAndSymbols[Math.floor(Math.random() * lettersAndSymbols.length)];
-  };
+  }, [lettersAndSymbols]);
 
-  const getRandomColor = () => {
-    return glitchColors[Math.floor(Math.random() * glitchColors.length)];
-  };
+  const getRandomColor = useCallback(() => {
+    return glitchPalette[Math.floor(Math.random() * glitchPalette.length)];
+  }, [glitchPalette]);
 
   const hexToRgb = (hex: string) => {
     const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
@@ -81,7 +82,7 @@ const LetterGlitch = ({
     return { columns, rows };
   };
 
-  const initializeLetters = (columns: number, rows: number) => {
+  const initializeLetters = useCallback((columns: number, rows: number) => {
     grid.current = { columns, rows };
     const totalLetters = columns * rows;
     letters.current = Array.from({ length: totalLetters }, () => ({
@@ -90,9 +91,9 @@ const LetterGlitch = ({
       targetColor: getRandomColor(),
       colorProgress: 1
     }));
-  };
+  }, [getRandomChar, getRandomColor]);
 
-  const resizeCanvas = () => {
+  const resizeCanvas = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const parent = canvas.parentElement;
@@ -114,7 +115,7 @@ const LetterGlitch = ({
     const { columns, rows } = calculateGrid(rect.width, rect.height);
     initializeLetters(columns, rows);
     drawLetters();
-  };
+  }, [initializeLetters]);
 
   const drawLetters = () => {
     if (!context.current || letters.current.length === 0) return;
@@ -132,7 +133,7 @@ const LetterGlitch = ({
     });
   };
 
-  const updateLetters = () => {
+  const updateLetters = useCallback(() => {
     if (!letters.current || letters.current.length === 0) return;
 
     const updateCount = Math.max(1, Math.floor(letters.current.length * 0.05));
@@ -151,9 +152,9 @@ const LetterGlitch = ({
         letters.current[index].colorProgress = 0;
       }
     }
-  };
+  }, [getRandomChar, getRandomColor, smooth]);
 
-  const handleSmoothTransitions = () => {
+  const handleSmoothTransitions = useCallback(() => {
     let needsRedraw = false;
     letters.current.forEach(letter => {
       if (letter.colorProgress < 1) {
@@ -172,9 +173,9 @@ const LetterGlitch = ({
     if (needsRedraw) {
       drawLetters();
     }
-  };
+  }, []);
 
-  const animate = () => {
+  const animate = useCallback(() => {
     const now = Date.now();
     if (now - lastGlitchTime.current >= glitchSpeed) {
       updateLetters();
@@ -187,9 +188,10 @@ const LetterGlitch = ({
     }
 
     animationRef.current = requestAnimationFrame(animate);
-  };
+  }, [glitchSpeed, handleSmoothTransitions, smooth, updateLetters]);
 
   useEffect(() => {
+    let isMounted = true;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -211,11 +213,20 @@ const LetterGlitch = ({
     window.addEventListener('resize', handleResize);
 
     return () => {
-      cancelAnimationFrame(animationRef.current!);
+      isMounted = false;
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
+      }
       window.removeEventListener('resize', handleResize);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [glitchSpeed, smooth]);
+  }, [
+    animate,
+    glitchPalette,
+    lettersAndSymbols,
+    resizeCanvas,
+    smooth
+  ]);
 
   return (
     <div className="relative w-full h-full bg-black overflow-hidden">

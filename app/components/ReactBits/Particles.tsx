@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { Renderer, Camera, Geometry, Program, Mesh } from 'ogl';
 
 interface ParticlesProps {
@@ -72,7 +72,6 @@ const vertex = /* glsl */ `
     }
     
     gl_Position = projectionMatrix * mvPos;
-    gl_Position = projectionMatrix * mvPos;
   }
 `;
 
@@ -117,6 +116,11 @@ const Particles: React.FC<ParticlesProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const mouseRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
+  const palette = useMemo(() => {
+    const source = particleColors && particleColors.length > 0 ? particleColors : defaultColors;
+    return source.map(color => hexToRgb(color));
+  }, [particleColors]);
+
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -152,8 +156,7 @@ const Particles: React.FC<ParticlesProps> = ({
     const count = particleCount;
     const positions = new Float32Array(count * 3);
     const randoms = new Float32Array(count * 4);
-    const colors = new Float32Array(count * 3);
-    const palette = particleColors && particleColors.length > 0 ? particleColors : defaultColors;
+  const colors = new Float32Array(count * 3);
 
     for (let i = 0; i < count; i++) {
       let x: number, y: number, z: number, len: number;
@@ -166,7 +169,7 @@ const Particles: React.FC<ParticlesProps> = ({
       const r = Math.cbrt(Math.random());
       positions.set([x * r, y * r, z * r], i * 3);
       randoms.set([Math.random(), Math.random(), Math.random(), Math.random()], i * 4);
-      const col = hexToRgb(palette[Math.floor(Math.random() * palette.length)]);
+      const col = palette[Math.floor(Math.random() * palette.length)];
       colors.set(col, i * 3);
     }
 
@@ -229,11 +232,40 @@ const Particles: React.FC<ParticlesProps> = ({
         container.removeEventListener('mousemove', handleMouseMove);
       }
       cancelAnimationFrame(animationFrameId);
+
+      const geometryWithDelete = geometry as unknown as {
+        delete?: () => void;
+        dispose?: () => void;
+      };
+      geometryWithDelete.delete?.();
+      geometryWithDelete.dispose?.();
+
+      const programWithDelete = program as unknown as {
+        delete?: () => void;
+        dispose?: () => void;
+      };
+      programWithDelete.delete?.();
+      programWithDelete.dispose?.();
+
+      const meshWithDelete = particles as unknown as {
+        delete?: () => void;
+        dispose?: () => void;
+      };
+      meshWithDelete.delete?.();
+      meshWithDelete.dispose?.();
+
+      const rendererWithDispose = renderer as unknown as {
+        dispose?: () => void;
+      };
+      rendererWithDispose.dispose?.();
+
+      const loseContext = gl.getExtension('WEBGL_lose_context');
+      loseContext?.loseContext();
+
       if (container.contains(gl.canvas)) {
         container.removeChild(gl.canvas);
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     particleCount,
     particleSpread,
@@ -244,7 +276,8 @@ const Particles: React.FC<ParticlesProps> = ({
     particleBaseSize,
     sizeRandomness,
     cameraDistance,
-    disableRotation
+    disableRotation,
+    palette
   ]);
 
   return <div ref={containerRef} className={`relative w-full h-full ${className}`} />;

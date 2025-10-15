@@ -1,4 +1,3 @@
-import Particles from "../ReactBits/Particles";
 import FadeContent from "../ReactBits/FadeContent";
 import FilteredProjects from "./components/FilteredProjects";
 
@@ -13,16 +12,7 @@ const Projects = () => {
   return (
     <div id="Projects" className="sm:h-[120svh] h-[200svh]">
       <div className="relative h-full w-full">
-        <Particles
-          particleColors={["#ffffff", "#ffffff"]}
-          particleCount={70}
-          particleSpread={10}
-          speed={0.05}
-          particleBaseSize={100}
-          alphaParticles={true}
-          sizeRandomness={2}
-        />
-        <div className="absolute inset-0 flex flex-col px-4 pt-20">
+        <div className="flex h-full w-full flex-col px-4 pt-20">
           <FadeContent
             className="h-fit"
             blur={true}

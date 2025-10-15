@@ -17,9 +17,9 @@ const Contact = () => {
           borderColor="#333"
           hoverFillColor="#222"
         />
-        <div className="absolute inset-0 flex flex-col px-4 pt-20">
+        <div className="absolute inset-0 flex flex-col px-4 pt-20 pointer-events-none">
           <FadeContent
-            className="h-fit"
+            className="h-fit pointer-events-auto"
             blur={true}
             duration={1000}
             easing="ease-out"
@@ -27,8 +27,8 @@ const Contact = () => {
           >
             <h1 className="sm:text-6xl text-4xl text-center">Contact Me</h1>
           </FadeContent>
-          <div className="grid grid-cols-1 sm:grid-cols-2 h-full">
-            <div className="flex flex-col w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 h-full gap-4">
+            <div className="flex flex-col w-full pointer-events-auto">
               <FadeContent
                 className="w-full h-full"
                 blur={false}
@@ -41,7 +41,7 @@ const Contact = () => {
               </FadeContent>
             </div>
             <FadeContent
-              className="w-full h-full"
+              className="w-full h-full pointer-events-auto"
               blur={false}
               duration={1000}
               delay={700}

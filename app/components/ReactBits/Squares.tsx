@@ -35,24 +35,26 @@ const Squares: React.FC<SquaresProps> = ({
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-    if (!ctx) return;
+    const resizeCanvas = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      numSquaresX.current = Math.ceil(canvas.width / squareSize) + 1;
+      numSquaresY.current = Math.ceil(canvas.height / squareSize) + 1;
+    };
 
-    let gradient: CanvasGradient | null = null;
-    let pointerUpdateRef: number | null = null;
-    let latestPointerEvent: MouseEvent | null = null;
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
     const drawGrid = () => {
-      const dpr = window.devicePixelRatio || 1;
-      const width = canvas.width / dpr;
-      const height = canvas.height / dpr;
+      if (!ctx) return;
 
-      ctx.clearRect(0, 0, width, height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const startX = Math.floor(gridOffset.current.x / squareSize) * squareSize;
       const startY = Math.floor(gridOffset.current.y / squareSize) * squareSize;
 
-      for (let x = startX; x < width + squareSize; x += squareSize) {
-        for (let y = startY; y < height + squareSize; y += squareSize) {
+      for (let x = startX; x < canvas.width + squareSize; x += squareSize) {
+        for (let y = startY; y < canvas.height + squareSize; y += squareSize) {
           const squareX = x - (gridOffset.current.x % squareSize);
           const squareY = y - (gridOffset.current.y % squareSize);
 
@@ -70,39 +72,20 @@ const Squares: React.FC<SquaresProps> = ({
         }
       }
 
-      if (!gradient) {
-        gradient = ctx.createRadialGradient(
-          width / 2,
-          height / 2,
-          0,
-          width / 2,
-          height / 2,
-          Math.sqrt(width ** 2 + height ** 2) / 2
-        );
-        gradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
-        gradient.addColorStop(1, '#060010');
-      }
+      const gradient = ctx.createRadialGradient(
+        canvas.width / 2,
+        canvas.height / 2,
+        0,
+        canvas.width / 2,
+        canvas.height / 2,
+        Math.sqrt(canvas.width ** 2 + canvas.height ** 2) / 2
+      );
+      gradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
+      gradient.addColorStop(1, '#060010');
 
       ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, width, height);
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
     };
-
-    const resizeCanvas = () => {
-      const dpr = window.devicePixelRatio || 1;
-      const { clientWidth, clientHeight } = canvas;
-      canvas.width = Math.max(1, Math.floor(clientWidth * dpr));
-      canvas.height = Math.max(1, Math.floor(clientHeight * dpr));
-      canvas.style.width = `${clientWidth}px`;
-      canvas.style.height = `${clientHeight}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      numSquaresX.current = Math.ceil(clientWidth / squareSize) + 1;
-      numSquaresY.current = Math.ceil(clientHeight / squareSize) + 1;
-      gradient = null;
-      drawGrid();
-    };
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
 
     const updateAnimation = () => {
       const effectiveSpeed = Math.max(speed, 0.1);
@@ -131,20 +114,15 @@ const Squares: React.FC<SquaresProps> = ({
       requestRef.current = requestAnimationFrame(updateAnimation);
     };
 
-    const processPointerUpdate = () => {
-      pointerUpdateRef = null;
-      const event = latestPointerEvent;
-      if (!event) return;
+    const handleMouseMove = (event: MouseEvent) => {
+      if (!canvas) return;
 
       const rect = canvas.getBoundingClientRect();
       const mouseX = event.clientX - rect.left;
       const mouseY = event.clientY - rect.top;
 
       if (mouseX < 0 || mouseY < 0 || mouseX > rect.width || mouseY > rect.height) {
-        if (hoveredSquareRef.current) {
-          hoveredSquareRef.current = null;
-          drawGrid();
-        }
+        hoveredSquareRef.current = null;
         return;
       }
 
@@ -160,33 +138,21 @@ const Squares: React.FC<SquaresProps> = ({
         hoveredSquareRef.current.y !== hoveredSquareY
       ) {
         hoveredSquareRef.current = { x: hoveredSquareX, y: hoveredSquareY };
-        drawGrid();
       }
-    };
-
-    const schedulePointerUpdate = (event: MouseEvent) => {
-      latestPointerEvent = event;
-      if (pointerUpdateRef !== null) return;
-      pointerUpdateRef = requestAnimationFrame(processPointerUpdate);
     };
 
     const handleMouseLeave = () => {
-      latestPointerEvent = null;
-      if (hoveredSquareRef.current) {
-        hoveredSquareRef.current = null;
-        drawGrid();
-      }
+      hoveredSquareRef.current = null;
     };
 
-    window.addEventListener('mousemove', schedulePointerUpdate);
+    window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseleave', handleMouseLeave);
     requestRef.current = requestAnimationFrame(updateAnimation);
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
-      if (pointerUpdateRef !== null) cancelAnimationFrame(pointerUpdateRef);
-      window.removeEventListener('mousemove', schedulePointerUpdate);
+      window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, [direction, speed, borderColor, hoverFillColor, squareSize]);

@@ -41,9 +41,9 @@ module.exports = {
       // SSH user
       user: "phro",
       // SSH host
-      host: "deploy.philipwhite.dev",
+      host: "192.168.0.17",
       // SSH port
-      port: "2222",
+      port: "22",
       // GIT remote/branch
       ref: "origin/main",
       // GIT remote
@@ -52,6 +52,7 @@ module.exports = {
       fetch: "all",
       // Path in the server
       path: "/var/www/portfolio-nextjs",
+      // Run once on server to allow setup: sudo mkdir -p /var/www/portfolio-nextjs && sudo chown -R phro:phro /var/www/portfolio-nextjs
       "post-setup": "ls -la",
       // Command run after pull source code
       "post-deploy":

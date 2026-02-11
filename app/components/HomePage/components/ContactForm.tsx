@@ -6,7 +6,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { addToast, Button, Form, Input, Textarea } from "@heroui/react";
+import Script from "next/script";
 import { useCallback, useEffect, useRef, useState } from "react";
+
+const TURNSTILE_SCRIPT_SRC =
+  "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
 
 declare global {
   interface Window {
@@ -103,48 +107,13 @@ const ContactForm = () => {
     });
   }, [resetTurnstile]);
 
+  // When Turnstile is already loaded (e.g. script from next/script or cached), render the widget
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const scriptSrc = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-    const handleLoad = () => renderTurnstile();
-    const handleError = () => {
-      setTurnstileError(
-        "Unable to load verification widget. Please try again later."
-      );
-    };
-
-    if (window.turnstile) {
+    if (typeof window !== "undefined" && window.turnstile) {
       renderTurnstile();
-      return;
     }
-
-    let script = document.querySelector<HTMLScriptElement>(
-      `script[src="${scriptSrc}"]`
-    );
-
-    if (script) {
-      script.addEventListener("load", handleLoad);
-      script.addEventListener("error", handleError);
-      return () => {
-        script?.removeEventListener("load", handleLoad);
-        script?.removeEventListener("error", handleError);
-      };
-    }
-
-    script = document.createElement("script");
-    script.src = scriptSrc;
-    script.async = true;
-    script.defer = true;
-    script.addEventListener("load", handleLoad);
-    script.addEventListener("error", handleError);
-    document.head.appendChild(script);
-
-    return () => {
-      script?.removeEventListener("load", handleLoad);
-      script?.removeEventListener("error", handleError);
-    };
   }, [renderTurnstile]);
+
   return (
     <Form
       className="flex flex-col justify-center items-center h-full"
@@ -319,6 +288,16 @@ const ContactForm = () => {
           isDisabled={hasMessageSubmitted}
         />
         <div className="sm:col-span-2 flex flex-col items-center gap-2">
+          <Script
+            src={TURNSTILE_SCRIPT_SRC}
+            strategy="afterInteractive"
+            onLoad={() => renderTurnstile()}
+            onError={() =>
+              setTurnstileError(
+                "Unable to load verification widget. Please try again later."
+              )
+            }
+          />
           <div ref={turnstileContainerRef} className="flex justify-center" />
           {turnstileError ? (
             <p className="text-sm text-red-400 text-center">{turnstileError}</p>

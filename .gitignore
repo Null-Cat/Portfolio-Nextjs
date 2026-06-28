@@ -32,9 +32,16 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# Public Turnstile site key is committed so CI (Cloudflare Workers Builds) can inline it
+!.env.production
 
 # vercel
 .vercel
+
+# cloudflare / opennext
+/.open-next/
+/.wrangler/
+cloudflare-env.d.ts
 
 # typescript
 *.tsbuildinfo

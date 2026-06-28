@@ -1,19 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import nodemailer from "nodemailer";
 import "../../envConfig.ts";
 const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY ?? "";
 const TURNSTILE_SECRET_KEY_DUMMY =
   process.env.TURNSTILE_SECRET_KEY_DUMMY ??
   "1x0000000000000000000000000000000AA";
-const nodeMailerTransporter = nodemailer.createTransport({
-  host: "mail.spacemail.com",
-  port: 465,
-  secure: true,
-  auth: {
-    user: "philip@philipwhite.dev",
-    pass: process.env.SMTP_Password,
-  },
-});
 
 export default async function handler(
   req: NextApiRequest,
@@ -147,10 +137,19 @@ export default async function handler(
     return;
   }
 
+  const smtpPassword = process.env.SMTP_Password ?? "";
+  if (!smtpPassword) {
+    console.error(
+      `[${timestamp}] 500 Internal Server Error: SMTP password is not configured.`
+    );
+    res.status(500).json({ error: "Internal Server Error" });
+    return;
+  }
+
   const emailPayload = {
-    from: `"${name}" <philip@philipwhite.dev>`,
+    from: { name, email: "philip@philipwhite.dev" },
     to: "philip@philipwhite.dev",
-    replyTo: emailAddress,
+    reply: emailAddress,
     subject: `Portfolio Message: ${subject}`,
     text: `Name: ${name}\nEmail: ${emailAddress}\nMessage:\n${message}`,
     html: contactEmailTemplateHTML(
@@ -162,7 +161,22 @@ export default async function handler(
   };
 
   try {
-    await nodeMailerTransporter.sendMail(emailPayload);
+    // worker-mailer relies on `cloudflare:sockets`, so it is loaded lazily and
+    // only kept external from the Next.js bundler (see next.config.ts).
+    const { WorkerMailer } = await import("worker-mailer");
+    await WorkerMailer.send(
+      {
+        host: "mail.spacemail.com",
+        port: 465,
+        secure: true,
+        credentials: {
+          username: "philip@philipwhite.dev",
+          password: smtpPassword,
+        },
+        authType: "plain",
+      },
+      emailPayload
+    );
     console.log(`[${timestamp}] 200 OK: Contact email sent successfully.`);
     res.status(200).json({ message: "Contact email sent successfully." });
   } catch (err) {

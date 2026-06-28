@@ -1,9 +1,13 @@
 import type { NextConfig } from "next";
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
 const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
+  // worker-mailer imports `cloudflare:sockets`, which is only available in the
+  // Workers runtime. Keep it external so Next's bundler doesn't try to resolve it.
+  serverExternalPackages: ["worker-mailer"],
   async headers() {
     return [
       {
@@ -34,3 +38,6 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
+// Enables Cloudflare bindings (env vars, secrets, etc.) during `next dev`.
+initOpenNextCloudflareForDev();

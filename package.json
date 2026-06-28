@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p 3333",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.3.0",
@@ -18,6 +21,7 @@
     "@heroui/theme": "^2.4.26",
     "@heroui/toast": "^2.0.22",
     "@next/env": "^16.2.9",
+    "@opennextjs/cloudflare": "^1.20.1",
     "@prisma/client": "^7.8.0",
     "@radix-ui/react-slot": "^1.3.0",
     "@tailwindcss/postcss": "^4.3.1",
@@ -29,12 +33,12 @@
     "lucide-react": "^1.22.0",
     "motion": "^12.42.0",
     "next": "^16.2.9",
-    "nodemailer": "^9.0.1",
     "ogl": "^1.0.11",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "tailwind-merge": "^3.6.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "worker-mailer": "^1.2.1"
   },
   "overrides": {
     "postcss": "^8.5.16",
@@ -43,7 +47,6 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.5",
     "@types/node": "^26.0.1",
-    "@types/nodemailer": "^8.0.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "eslint": "^9.39.4",
@@ -51,6 +54,7 @@
     "postcss": "^8.5.16",
     "prisma": "^7.8.0",
     "tailwindcss": "^4.3.1",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "wrangler": "^4.105.0"
   }
 }

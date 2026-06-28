@@ -1,5 +1,6 @@
 "use client";
 import React, { useRef, useEffect } from 'react';
+import { useVisibilityActive } from './useInView';
 
 type CanvasStrokeStyle = string | CanvasGradient | CanvasPattern;
 
@@ -31,17 +32,35 @@ const Squares: React.FC<SquaresProps> = ({
   const numSquaresY = useRef<number>(0);
   const gridOffset = useRef<GridOffset>({ x: 0, y: 0 });
   const hoveredSquareRef = useRef<GridOffset | null>(null);
+  const startRef = useRef<() => void>(() => {});
+  const stopRef = useRef<() => void>(() => {});
+  const activeRef = useRef<boolean>(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
+    let vignette: CanvasGradient | null = null;
+
     const resizeCanvas = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
       numSquaresX.current = Math.ceil(canvas.width / squareSize) + 1;
       numSquaresY.current = Math.ceil(canvas.height / squareSize) + 1;
+
+      if (ctx) {
+        vignette = ctx.createRadialGradient(
+          canvas.width / 2,
+          canvas.height / 2,
+          0,
+          canvas.width / 2,
+          canvas.height / 2,
+          Math.sqrt(canvas.width ** 2 + canvas.height ** 2) / 2
+        );
+        vignette.addColorStop(0, 'rgba(0, 0, 0, 0)');
+        vignette.addColorStop(1, vignetteColor);
+      }
     };
 
     window.addEventListener('resize', resizeCanvas);
@@ -74,19 +93,10 @@ const Squares: React.FC<SquaresProps> = ({
         }
       }
 
-      const gradient = ctx.createRadialGradient(
-        canvas.width / 2,
-        canvas.height / 2,
-        0,
-        canvas.width / 2,
-        canvas.height / 2,
-        Math.sqrt(canvas.width ** 2 + canvas.height ** 2) / 2
-      );
-  gradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
-  gradient.addColorStop(1, vignetteColor);
-
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      if (vignette) {
+        ctx.fillStyle = vignette;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
     };
 
     const updateAnimation = () => {
@@ -149,15 +159,40 @@ const Squares: React.FC<SquaresProps> = ({
 
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseleave', handleMouseLeave);
-    requestRef.current = requestAnimationFrame(updateAnimation);
+
+    const start = () => {
+      if (requestRef.current == null) {
+        requestRef.current = requestAnimationFrame(updateAnimation);
+      }
+    };
+    const stop = () => {
+      if (requestRef.current != null) {
+        cancelAnimationFrame(requestRef.current);
+        requestRef.current = null;
+      }
+    };
+    startRef.current = start;
+    stopRef.current = stop;
+
+    // Render one static frame so the grid is present before becoming active.
+    drawGrid();
+    if (activeRef.current) start();
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
-      if (requestRef.current) cancelAnimationFrame(requestRef.current);
+      stop();
+      startRef.current = () => {};
+      stopRef.current = () => {};
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, [direction, speed, borderColor, hoverFillColor, squareSize, vignetteColor]);
+
+  useVisibilityActive(canvasRef, (active) => {
+    activeRef.current = active;
+    if (active) startRef.current();
+    else stopRef.current();
+  });
 
   return <canvas ref={canvasRef} className="w-full h-full border-none block"></canvas>;
 };

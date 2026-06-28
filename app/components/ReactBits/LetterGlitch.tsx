@@ -1,5 +1,6 @@
 "use client";
 import { useRef, useEffect } from 'react';
+import { useVisibilityActive } from './useInView';
 
 interface LetterGlitchProps {
   glitchColors?: string[];
@@ -31,6 +32,10 @@ const LetterGlitch = ({
   const grid = useRef({ columns: 0, rows: 0 });
   const context = useRef<CanvasRenderingContext2D | null>(null);
   const lastGlitchTime = useRef(Date.now());
+  const dimensions = useRef({ width: 0, height: 0 });
+  const activeRef = useRef(false);
+  const startRef = useRef<() => void>(() => {});
+  const stopRef = useRef<() => void>(() => {});
 
   const lettersAndSymbols = Array.from(characters);
 
@@ -98,7 +103,7 @@ const LetterGlitch = ({
     const parent = canvas.parentElement;
     if (!parent) return;
 
-    const dpr = window.devicePixelRatio || 1;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const rect = parent.getBoundingClientRect();
 
     canvas.width = rect.width * dpr;
@@ -106,6 +111,8 @@ const LetterGlitch = ({
 
     canvas.style.width = `${rect.width}px`;
     canvas.style.height = `${rect.height}px`;
+
+    dimensions.current = { width: rect.width, height: rect.height };
 
     if (context.current) {
       context.current.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -119,7 +126,7 @@ const LetterGlitch = ({
   const drawLetters = () => {
     if (!context.current || letters.current.length === 0) return;
     const ctx = context.current;
-    const { width, height } = canvasRef.current!.getBoundingClientRect();
+    const { width, height } = dimensions.current;
     ctx.clearRect(0, 0, width, height);
     ctx.font = `${fontSize}px monospace`;
     ctx.textBaseline = 'top';
@@ -195,27 +202,50 @@ const LetterGlitch = ({
 
     context.current = canvas.getContext('2d');
     resizeCanvas();
-    animate();
+
+    const start = () => {
+      if (animationRef.current == null) {
+        animate();
+      }
+    };
+    const stop = () => {
+      if (animationRef.current != null) {
+        cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
+      }
+    };
+    startRef.current = start;
+    stopRef.current = stop;
+
+    if (activeRef.current) start();
 
     let resizeTimeout: NodeJS.Timeout;
 
     const handleResize = () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
-        cancelAnimationFrame(animationRef.current as number);
+        stop();
         resizeCanvas();
-        animate();
+        if (activeRef.current) start();
       }, 100);
     };
 
     window.addEventListener('resize', handleResize);
 
     return () => {
-      cancelAnimationFrame(animationRef.current!);
+      stop();
+      startRef.current = () => {};
+      stopRef.current = () => {};
       window.removeEventListener('resize', handleResize);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [glitchSpeed, smooth]);
+
+  useVisibilityActive(canvasRef, (active) => {
+    activeRef.current = active;
+    if (active) startRef.current();
+    else stopRef.current();
+  });
 
   return (
     <div className="relative w-full h-full bg-black overflow-hidden">

@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef } from 'react';
 import { Renderer, Camera, Geometry, Program, Mesh } from 'ogl';
+import { useVisibilityActive } from './useInView';
 
 interface ParticlesProps {
   particleCount?: number;
@@ -72,7 +73,6 @@ const vertex = /* glsl */ `
     }
     
     gl_Position = projectionMatrix * mvPos;
-    gl_Position = projectionMatrix * mvPos;
   }
 `;
 
@@ -116,6 +116,9 @@ const Particles: React.FC<ParticlesProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const mouseRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const activeRef = useRef(false);
+  const startRef = useRef<() => void>(() => {});
+  const stopRef = useRef<() => void>(() => {});
 
   useEffect(() => {
     const container = containerRef.current;
@@ -192,7 +195,7 @@ const Particles: React.FC<ParticlesProps> = ({
 
     const particles = new Mesh(gl, { mode: gl.POINTS, geometry, program });
 
-    let animationFrameId: number;
+    let animationFrameId: number | null = null;
     let lastTime = performance.now();
     let elapsed = 0;
 
@@ -221,14 +224,33 @@ const Particles: React.FC<ParticlesProps> = ({
       renderer.render({ scene: particles, camera });
     };
 
-    animationFrameId = requestAnimationFrame(update);
+    const start = () => {
+      if (animationFrameId == null) {
+        lastTime = performance.now();
+        animationFrameId = requestAnimationFrame(update);
+      }
+    };
+    const stop = () => {
+      if (animationFrameId != null) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
+    };
+    startRef.current = start;
+    stopRef.current = stop;
+
+    // Render one static frame so the scene is present before becoming active.
+    renderer.render({ scene: particles, camera });
+    if (activeRef.current) start();
 
     return () => {
       window.removeEventListener('resize', resize);
       if (moveParticlesOnHover) {
         container.removeEventListener('mousemove', handleMouseMove);
       }
-      cancelAnimationFrame(animationFrameId);
+      stop();
+      startRef.current = () => {};
+      stopRef.current = () => {};
       if (container.contains(gl.canvas)) {
         container.removeChild(gl.canvas);
       }
@@ -246,6 +268,12 @@ const Particles: React.FC<ParticlesProps> = ({
     cameraDistance,
     disableRotation
   ]);
+
+  useVisibilityActive(containerRef, (active) => {
+    activeRef.current = active;
+    if (active) startRef.current();
+    else stopRef.current();
+  });
 
   return <div ref={containerRef} className={`relative w-full h-full ${className}`} />;
 };

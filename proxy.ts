@@ -1,15 +1,13 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export async function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   if (process.env.NODE_ENV !== "production") return NextResponse.next();
 
   const timestamp = new Date().toISOString();
   console.log(
     `[${timestamp}] ${req.method} ${req.nextUrl.pathname} for ${getTrueIP(req)}`
   );
-
-
 
   return NextResponse.next();
 }

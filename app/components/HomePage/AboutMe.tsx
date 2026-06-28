@@ -1,6 +1,6 @@
 import FadeContent from "../ReactBits/FadeContent";
 import Squares from "../ReactBits/Squares";
-import { Divider, Image } from "@heroui/react";
+import { Divider, Image } from "@/app/lib/heroui";
 import TechnologyExperience from "./components/TechnologyExperience";
 import OtherTechnologyExperience from "./components/OtherTechnologyExperience";
 

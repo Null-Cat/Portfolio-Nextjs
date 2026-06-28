@@ -1,4 +1,4 @@
-import { Tooltip, Image } from "@heroui/react";
+import { Tooltip, Image } from "@/app/lib/heroui";
 
 interface OtherTechnologyExperienceProps {
   toolTipText: string;

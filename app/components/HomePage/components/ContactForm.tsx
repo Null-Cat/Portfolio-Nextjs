@@ -130,7 +130,7 @@ const ContactForm = () => {
             description: "Please confirm you are not a robot before submitting.",
             color: "danger",
             timeout: 5000,
-            shouldShowTimeoutProgess: true,
+            shouldShowTimeoutProgress: true,
           });
           return;
         }
@@ -168,7 +168,7 @@ const ContactForm = () => {
               description: "Thank you for reaching out!",
               color: "success",
               timeout: 5000,
-              shouldShowTimeoutProgess: true,
+              shouldShowTimeoutProgress: true,
             });
             return;
           }
@@ -184,7 +184,7 @@ const ContactForm = () => {
                 "Message too long! Ensure your message is less than 1000 characters",
               color: "danger",
               timeout: 5000,
-              shouldShowTimeoutProgess: true,
+              shouldShowTimeoutProgress: true,
             });
             resetTurnstile();
             return;
@@ -204,7 +204,7 @@ const ContactForm = () => {
                 : errorMessage,
             color: "danger",
             timeout: 5000,
-            shouldShowTimeoutProgess: true,
+            shouldShowTimeoutProgress: true,
           });
           setTurnstileError(
             normalizedError.includes("verification") ? errorMessage : null
@@ -224,7 +224,7 @@ const ContactForm = () => {
               "Please send me an email and I will get back to you as soon as possible.",
             color: "danger",
             timeout: 5000,
-            shouldShowTimeoutProgess: true,
+            shouldShowTimeoutProgress: true,
           });
           resetTurnstile();
         };

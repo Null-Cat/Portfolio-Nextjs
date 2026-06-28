@@ -9,7 +9,7 @@ import {
 } from "@/app/components/SVGs";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Chip, Image, Link, Spacer } from "@heroui/react";
+import { Chip, Image, Link, Spacer } from "@/app/lib/heroui";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

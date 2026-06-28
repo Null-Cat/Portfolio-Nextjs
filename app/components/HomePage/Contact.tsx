@@ -1,4 +1,4 @@
-import { Link } from "@heroui/react";
+import { Link } from "@/app/lib/heroui";
 import FadeContent from "../ReactBits/FadeContent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";

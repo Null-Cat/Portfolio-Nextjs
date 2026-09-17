@@ -11,8 +11,8 @@ interface VisibleProjectTag {
 
 const Projects = () => {
   return (
-    <div id="Projects" className="sm:h-[120svh] h-[200svh]">
-      <div className="relative h-full w-full">
+    <div id="Projects" className="relative w-full overflow-hidden">
+      <div className="absolute inset-0 z-0">
         <Particles
           particleColors={["#ffffff", "#ffffff"]}
           particleCount={70}
@@ -22,18 +22,18 @@ const Projects = () => {
           alphaParticles={true}
           sizeRandomness={2}
         />
-        <div className="absolute inset-0 flex flex-col px-4 pt-20">
-          <FadeContent
-            className="h-fit"
-            blur={true}
-            duration={1000}
-            easing="ease-out"
-            initialOpacity={0}
-          >
-            <h1 className="sm:text-6xl text-4xl text-center">Projects</h1>
-          </FadeContent>
-          <FilteredProjects />
-        </div>
+      </div>
+      <div className="relative z-10 flex flex-col px-4 pt-20 pb-16">
+        <FadeContent
+          className="h-fit"
+          blur={true}
+          duration={1000}
+          easing="ease-out"
+          initialOpacity={0}
+        >
+          <h1 className="sm:text-6xl text-4xl text-center">Projects</h1>
+        </FadeContent>
+        <FilteredProjects />
       </div>
     </div>
   );

@@ -263,7 +263,7 @@ const FilteredProjects = () => {
           setSortBy={setSortBy}
         />
       </FadeContent>
-      <div className="flex flex-wrap justify-center pt-4 gap-4 overflow-y-scroll scrollbar">
+      <div className="flex flex-wrap justify-center pt-4 gap-4">
         {projectResults.map((project, index) => (
           <FadeContent
             key={`${project.title}-${index}`}

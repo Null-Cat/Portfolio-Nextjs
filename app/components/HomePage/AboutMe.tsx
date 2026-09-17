@@ -147,31 +147,31 @@ const AboutMe = () => {
           >
             <TechnologyExperience
               altText="Next js Logo"
-              src="https://skillicons.dev/icons?i=nextjs"
+              src="/skillicons/nextjs.svg"
               text="Next.js"
               subText="1+ Year"
             />
             <TechnologyExperience
               altText="React Logo"
-              src="https://skillicons.dev/icons?i=react"
+              src="/skillicons/react.svg"
               text="React"
               subText="1+ Year"
             />
             <TechnologyExperience
               altText="Node js Logo"
-              src="https://skillicons.dev/icons?i=nodejs"
+              src="/skillicons/nodejs.svg"
               text="Node.js"
               subText="5+ Years"
             />
             <TechnologyExperience
               altText="Unreal Engine Logo"
-              src="https://skillicons.dev/icons?i=unreal"
+              src="/skillicons/unreal.svg"
               text="Unreal Engine"
               subText="3+ Years"
             />
             <TechnologyExperience
               altText="Unity Logo"
-              src="https://skillicons.dev/icons?i=unity"
+              src="/skillicons/unity.svg"
               text="Unity"
               subText="2+ Years"
             />
@@ -186,25 +186,25 @@ const AboutMe = () => {
           >
             <TechnologyExperience
               altText="Java Script Logo"
-              src="https://skillicons.dev/icons?i=js"
+              src="/skillicons/js.svg"
               text="JavaScript"
               subText="5+ Years"
             />
             <TechnologyExperience
               altText="Type Script Logo"
-              src="https://skillicons.dev/icons?i=ts"
+              src="/skillicons/ts.svg"
               text="TypeScript"
               subText="2+ Years"
             />
             <TechnologyExperience
               altText="C Plus Plus Logo"
-              src="https://skillicons.dev/icons?i=cpp"
+              src="/skillicons/cpp.svg"
               text="C++"
               subText="3+ Years"
             />
             <TechnologyExperience
               altText="C Sharp Logo"
-              src="https://skillicons.dev/icons?i=cs"
+              src="/skillicons/cs.svg"
               text="C#"
               subText="2+ Years"
             />
@@ -222,102 +222,102 @@ const AboutMe = () => {
                 <OtherTechnologyExperience
                   toolTipText="Python"
                   altText="Python Logo"
-                  src="https://skillicons.dev/icons?i=py"
+                  src="/skillicons/py.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="Java"
                   altText="Java Logo"
-                  src="https://skillicons.dev/icons?i=java"
+                  src="/skillicons/java.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="Lua"
                   altText="Lua Logo"
-                  src="https://skillicons.dev/icons?i=lua"
+                  src="/skillicons/lua.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="Docker"
                   altText="Docker Logo"
-                  src="https://skillicons.dev/icons?i=docker"
+                  src="/skillicons/docker.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="Postgres"
                   altText="Postgres Logo"
-                  src="https://skillicons.dev/icons?i=postgres"
+                  src="/skillicons/postgres.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="MySQL"
                   altText="My SQL Logo"
-                  src="https://skillicons.dev/icons?i=mysql"
+                  src="/skillicons/mysql.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="Express.js"
                   altText="Express js Logo"
-                  src="https://skillicons.dev/icons?i=express"
+                  src="/skillicons/express.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="Tailwind CSS"
                   altText="Tailwind CSS Logo"
-                  src="https://skillicons.dev/icons?i=tailwind"
+                  src="/skillicons/tailwind.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="Bootstrap"
                   altText="Bootstrap Logo"
-                  src="https://skillicons.dev/icons?i=bootstrap"
+                  src="/skillicons/bootstrap.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="Git"
                   altText="Git Logo"
-                  src="https://skillicons.dev/icons?i=git"
+                  src="/skillicons/git.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="GitHub"
                   altText="Git Hub Logo"
-                  src="https://skillicons.dev/icons?i=github"
+                  src="/skillicons/github.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="Photoshop"
                   altText="Photoshop Logo"
-                  src="https://skillicons.dev/icons?i=photoshop"
+                  src="/skillicons/photoshop.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="Blender"
                   altText="Blender Logo"
-                  src="https://skillicons.dev/icons?i=blender"
+                  src="/skillicons/blender.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="Visual Studio"
                   altText="Visual Studio Logo"
-                  src="https://skillicons.dev/icons?i=visualstudio"
+                  src="/skillicons/visualstudio.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="Visual Studio Code"
                   altText="Visual Studio Code Logo"
-                  src="https://skillicons.dev/icons?i=vscode"
+                  src="/skillicons/vscode.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="JetBrains Rider"
                   altText="Jet Brains Logo"
-                  src="https://skillicons.dev/icons?i=rider"
+                  src="/skillicons/rider.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="Raspberry Pi"
                   altText="Raspberry Pi Logo"
-                  src="https://skillicons.dev/icons?i=raspberrypi"
+                  src="/skillicons/raspberrypi.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="Arduino"
                   altText="Arduino Logo"
-                  src="https://skillicons.dev/icons?i=arduino"
+                  src="/skillicons/arduino.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="Heroku"
                   altText="Heroku Logo"
-                  src="https://skillicons.dev/icons?i=heroku"
+                  src="/skillicons/heroku.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="Nginx"
                   altText="Nginx Logo"
-                  src="https://skillicons.dev/icons?i=nginx"
+                  src="/skillicons/nginx.svg"
                 />
               </div>
             </div>

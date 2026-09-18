@@ -7,7 +7,7 @@ const Introduction = () => {
     <div id="Home" className="h-svh">
       <div className="relative h-full w-full">
         <LetterGlitch
-          glitchSpeed={50}
+          glitchSpeed={100}
           centerVignette={false}
           outerVignette={false}
           smooth={true}

@@ -11,7 +11,7 @@ const Contact = () => {
     <div id="Contact" className="h-[140svh] sm:h-svh">
       <div className="relative h-full w-full">
         <Squares
-          speed={0.5}
+          speed={0.2}
           squareSize={50}
           direction="up"
           borderColor="#333"

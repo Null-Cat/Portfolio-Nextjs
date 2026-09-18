@@ -114,6 +114,7 @@ const Particles: React.FC<ParticlesProps> = ({
   disableRotation = false,
   className
 }) => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const mouseRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const activeRef = useRef(false);
@@ -124,22 +125,41 @@ const Particles: React.FC<ParticlesProps> = ({
     const container = containerRef.current;
     if (!container) return;
 
-    const renderer = new Renderer({ depth: false, alpha: true });
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const renderer = new Renderer({
+      depth: false,
+      alpha: true,
+      dpr
+    });
     const gl = renderer.gl;
+    gl.canvas.style.display = 'block';
     container.appendChild(gl.canvas);
     gl.clearColor(0, 0, 0, 0);
 
     const camera = new Camera(gl, { fov: 15 });
     camera.position.set(0, 0, cameraDistance);
 
-    const resize = () => {
+    const setRendererSize = () => {
+      const nextDpr = Math.min(window.devicePixelRatio || 1, 2);
+      renderer.dpr = nextDpr;
       const width = container.clientWidth;
       const height = container.clientHeight;
       renderer.setSize(width, height);
       camera.perspective({ aspect: gl.canvas.width / gl.canvas.height });
+      return nextDpr;
     };
-    window.addEventListener('resize', resize, false);
-    resize();
+
+    const syncCanvasPosition = () => {
+      const wrapper = wrapperRef.current;
+      if (!wrapper) return;
+      const rect = wrapper.getBoundingClientRect();
+      const maxTop = Math.max(0, wrapper.offsetHeight - container.offsetHeight);
+      const top = Math.min(maxTop, Math.max(0, -rect.top));
+      container.style.transform = `translateY(${top}px)`;
+    };
+
+    setRendererSize();
+    syncCanvasPosition();
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
@@ -185,7 +205,7 @@ const Particles: React.FC<ParticlesProps> = ({
       uniforms: {
         uTime: { value: 0 },
         uSpread: { value: particleSpread },
-        uBaseSize: { value: particleBaseSize },
+        uBaseSize: { value: particleBaseSize * renderer.dpr },
         uSizeRandomness: { value: sizeRandomness },
         uAlphaParticles: { value: alphaParticles ? 1 : 0 }
       },
@@ -194,6 +214,19 @@ const Particles: React.FC<ParticlesProps> = ({
     });
 
     const particles = new Mesh(gl, { mode: gl.POINTS, geometry, program });
+
+    const resize = () => {
+      const nextDpr = setRendererSize();
+      program.uniforms.uBaseSize.value = particleBaseSize * nextDpr;
+    };
+
+    const handleResize = () => {
+      resize();
+      syncCanvasPosition();
+    };
+
+    window.addEventListener('resize', handleResize, false);
+    window.addEventListener('scroll', syncCanvasPosition, { passive: true });
 
     let animationFrameId: number | null = null;
     let lastTime = performance.now();
@@ -244,7 +277,8 @@ const Particles: React.FC<ParticlesProps> = ({
     if (activeRef.current) start();
 
     return () => {
-      window.removeEventListener('resize', resize);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', syncCanvasPosition);
       if (moveParticlesOnHover) {
         container.removeEventListener('mousemove', handleMouseMove);
       }
@@ -269,13 +303,17 @@ const Particles: React.FC<ParticlesProps> = ({
     disableRotation
   ]);
 
-  useVisibilityActive(containerRef, (active) => {
+  useVisibilityActive(wrapperRef, (active) => {
     activeRef.current = active;
     if (active) startRef.current();
     else stopRef.current();
   });
 
-  return <div ref={containerRef} className={`relative w-full h-full ${className}`} />;
+  return (
+    <div ref={wrapperRef} className={`absolute inset-0 overflow-hidden ${className ?? ''}`}>
+      <div ref={containerRef} className="absolute top-0 left-0 h-svh w-full" />
+    </div>
+  );
 };
 
 export default Particles;

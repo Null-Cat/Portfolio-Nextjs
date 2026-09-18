@@ -8,30 +8,30 @@ const AboutMe = () => {
   return (
     <div
       id="About"
-      className="relative w-full overflow-hidden sm:min-h-screen min-h-[100svh]"
+      className="relative w-full overflow-hidden sm:min-h-screen min-h-svh"
     >
       <div className="absolute inset-0 z-0">
         <Squares
-          speed={0.5}
+          speed={0.2}
           squareSize={50}
           direction="diagonal"
           borderColor="#333"
           hoverFillColor="#222"
         />
       </div>
-      <div className="relative z-10 flex w-full flex-col items-center px-4 pt-20 pb-16 pointer-events-none">
+      <div className="relative z-10 flex min-h-svh w-full flex-col items-center px-4 pt-20 pb-16 pointer-events-none sm:min-h-screen">
         <FadeContent
-          className="h-fit"
+          className="h-fit shrink-0"
           blur={true}
           duration={1000}
           easing="ease-out"
           initialOpacity={0}
         >
-          <h1 className="sm:text-6xl text-4xl pb-16 font-bold pointer-events-auto">
+          <h1 className="pointer-events-auto pb-16 text-4xl font-bold sm:pb-0 sm:text-6xl">
             About Me
           </h1>
         </FadeContent>
-        <div className="flex w-full grow flex-col items-center justify-center gap-4">
+        <div className="flex w-full min-h-0 grow flex-col items-center justify-center gap-4">
           <FadeContent
             className="flex h-fit w-full items-center justify-center"
             blur={false}

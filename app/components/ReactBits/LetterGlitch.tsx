@@ -22,6 +22,16 @@ interface Letter {
   isTransitioning: boolean;
 }
 
+interface GlyphAtlas {
+  canvas: HTMLCanvasElement;
+  ctx: CanvasRenderingContext2D;
+  cellW: number;
+  cellH: number;
+  cols: number;
+  next: number;
+  map: Map<string, number>;
+}
+
 const BASE_CHAR_WIDTH = 10;
 const BASE_CHAR_HEIGHT = 20;
 const BASE_FONT_SIZE = 16;
@@ -54,6 +64,88 @@ const lerpColor = (start: Rgb, end: Rgb, factor: number): Rgb => ({
   b: Math.round(start.b + (end.b - start.b) * factor)
 });
 
+const colorKey = (char: string, c: Rgb) => `${char}:${c.r},${c.g},${c.b}`;
+
+const quantizeChannel = (v: number) =>
+  Math.min(255, Math.max(0, Math.round(v / 4) * 4));
+
+const atlasColor = (c: Rgb, palette: Rgb[]): Rgb => {
+  for (let i = 0; i < palette.length; i++) {
+    const p = palette[i];
+    if (p.r === c.r && p.g === c.g && p.b === c.b) return p;
+  }
+  return {
+    r: quantizeChannel(c.r),
+    g: quantizeChannel(c.g),
+    b: quantizeChannel(c.b)
+  };
+};
+
+const createAtlas = (cellW: number, cellH: number, fontSize: number, slots: number): GlyphAtlas => {
+  const cols = Math.max(1, Math.ceil(Math.sqrt(slots)));
+  const rows = Math.max(1, Math.ceil(slots / cols));
+  const canvas = document.createElement('canvas');
+  canvas.width = cols * cellW;
+  canvas.height = rows * cellH;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    throw new Error('Failed to create glyph atlas context');
+  }
+  ctx.font = `${fontSize}px monospace`;
+  ctx.textBaseline = 'top';
+  ctx.textAlign = 'left';
+  ctx.imageSmoothingEnabled = false;
+  return { canvas, ctx, cellW, cellH, cols, next: 0, map: new Map() };
+};
+
+const growAtlas = (atlas: GlyphAtlas, fontSize: number) => {
+  const canvas = document.createElement('canvas');
+  canvas.width = atlas.canvas.width;
+  canvas.height = atlas.canvas.height * 2;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  ctx.drawImage(atlas.canvas, 0, 0);
+  ctx.font = `${fontSize}px monospace`;
+  ctx.textBaseline = 'top';
+  ctx.textAlign = 'left';
+  ctx.imageSmoothingEnabled = false;
+  atlas.canvas = canvas;
+  atlas.ctx = ctx;
+};
+
+const ensureGlyph = (atlas: GlyphAtlas, char: string, color: Rgb, fontSize: number): number => {
+  const key = colorKey(char, color);
+  const cached = atlas.map.get(key);
+  if (cached !== undefined) return cached;
+
+  const rows = Math.floor(atlas.canvas.height / atlas.cellH);
+  if (atlas.next >= atlas.cols * rows) {
+    growAtlas(atlas, fontSize);
+  }
+
+  const index = atlas.next++;
+  const sx = (index % atlas.cols) * atlas.cellW;
+  const sy = Math.floor(index / atlas.cols) * atlas.cellH;
+  const ctx = atlas.ctx;
+  ctx.clearRect(sx, sy, atlas.cellW, atlas.cellH);
+  ctx.fillStyle = rgbString(color);
+  ctx.fillText(char, sx, sy);
+  atlas.map.set(key, index);
+  return index;
+};
+
+const blitGlyph = (
+  ctx: CanvasRenderingContext2D,
+  atlas: GlyphAtlas,
+  index: number,
+  dx: number,
+  dy: number
+) => {
+  const sx = (index % atlas.cols) * atlas.cellW;
+  const sy = Math.floor(index / atlas.cols) * atlas.cellH;
+  ctx.drawImage(atlas.canvas, sx, sy, atlas.cellW, atlas.cellH, dx, dy, atlas.cellW, atlas.cellH);
+};
+
 const LetterGlitch = ({
   glitchColors = ['#2b4539', '#61dca3', '#61b3dc'],
   glitchSpeed = 50,
@@ -68,11 +160,12 @@ const LetterGlitch = ({
   const transitioning = useRef<number[]>([]);
   const grid = useRef({ columns: 0, rows: 0 });
   const cellMetrics = useRef({
-    charWidth: BASE_CHAR_WIDTH,
-    charHeight: BASE_CHAR_HEIGHT,
+    cellW: BASE_CHAR_WIDTH,
+    cellH: BASE_CHAR_HEIGHT,
     fontSize: BASE_FONT_SIZE
   });
   const context = useRef<CanvasRenderingContext2D | null>(null);
+  const atlasRef = useRef<GlyphAtlas | null>(null);
   const lastGlitchTime = useRef(Date.now());
   const dimensions = useRef({ width: 0, height: 0 });
   const activeRef = useRef(false);
@@ -102,11 +195,21 @@ const LetterGlitch = ({
     return colors[Math.floor(Math.random() * colors.length)] ?? { r: 0, g: 0, b: 0 };
   };
 
-  const calculateGrid = (width: number, height: number) => {
-    const { charWidth, charHeight } = cellMetrics.current;
-    const columns = Math.ceil(width / charWidth);
-    const rows = Math.ceil(height / charHeight);
-    return { columns, rows };
+  const paintCell = (index: number) => {
+    const ctx = context.current;
+    const atlas = atlasRef.current;
+    if (!ctx || !atlas) return;
+    const letter = letters.current[index];
+    if (!letter) return;
+
+    const { cellW, cellH, fontSize } = cellMetrics.current;
+    const cols = grid.current.columns;
+    const x = (index % cols) * cellW;
+    const y = Math.floor(index / cols) * cellH;
+    const color = atlasColor(letter.color, colorsRef.current);
+    const glyph = ensureGlyph(atlas, letter.char, color, fontSize);
+    ctx.clearRect(x, y, cellW, cellH);
+    blitGlyph(ctx, atlas, glyph, x, y);
   };
 
   const initializeLetters = (columns: number, rows: number) => {
@@ -134,72 +237,69 @@ const LetterGlitch = ({
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const rect = parent.getBoundingClientRect();
+    const width = Math.max(1, Math.round(rect.width * dpr));
+    const height = Math.max(1, Math.round(rect.height * dpr));
 
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-
+    canvas.width = width;
+    canvas.height = height;
     canvas.style.width = `${rect.width}px`;
     canvas.style.height = `${rect.height}px`;
 
-    dimensions.current = { width: rect.width, height: rect.height };
+    dimensions.current = { width, height };
 
-    if (context.current) {
-      context.current.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const ctx = context.current;
+    if (ctx) {
+      ctx.imageSmoothingEnabled = false;
     }
 
     const rawCells = (rect.width / BASE_CHAR_WIDTH) * (rect.height / BASE_CHAR_HEIGHT);
     const scale = rawCells > MAX_CELLS ? Math.sqrt(rawCells / MAX_CELLS) : 1;
-    cellMetrics.current = {
-      charWidth: BASE_CHAR_WIDTH * scale,
-      charHeight: BASE_CHAR_HEIGHT * scale,
-      fontSize: BASE_FONT_SIZE * scale
-    };
+    const cellW = Math.max(1, Math.round(BASE_CHAR_WIDTH * scale * dpr));
+    const cellH = Math.max(1, Math.round(BASE_CHAR_HEIGHT * scale * dpr));
+    const fontSize = BASE_FONT_SIZE * scale * dpr;
+    cellMetrics.current = { cellW, cellH, fontSize };
 
-    const { columns, rows } = calculateGrid(rect.width, rect.height);
+    const columns = Math.ceil(width / cellW);
+    const rows = Math.ceil(height / cellH);
+    const chars = charsRef.current;
+    const colors = colorsRef.current;
+    const atlas = createAtlas(cellW, cellH, fontSize, Math.max(1, chars.length * Math.max(colors.length, 1) * 4));
+    for (let i = 0; i < chars.length; i++) {
+      for (let j = 0; j < colors.length; j++) {
+        ensureGlyph(atlas, chars[i], colors[j], fontSize);
+      }
+    }
+    atlasRef.current = atlas;
+
     initializeLetters(columns, rows);
     drawLetters();
   };
 
   // Full repaint of every cell. Only used on init and resize.
   const drawLetters = () => {
-    if (!context.current || letters.current.length === 0) return;
     const ctx = context.current;
+    const atlas = atlasRef.current;
+    if (!ctx || !atlas || letters.current.length === 0) return;
     const { width, height } = dimensions.current;
-    const { charWidth, charHeight, fontSize } = cellMetrics.current;
+    const { cellW, cellH, fontSize } = cellMetrics.current;
     const cols = grid.current.columns;
+    const palette = colorsRef.current;
 
     ctx.clearRect(0, 0, width, height);
-    ctx.font = `${fontSize}px monospace`;
-    ctx.textBaseline = 'top';
 
     for (let index = 0; index < letters.current.length; index++) {
       const letter = letters.current[index];
-      const x = (index % cols) * charWidth;
-      const y = Math.floor(index / cols) * charHeight;
-      ctx.fillStyle = rgbString(letter.color);
-      ctx.fillText(letter.char, x, y);
+      const x = (index % cols) * cellW;
+      const y = Math.floor(index / cols) * cellH;
+      const color = atlasColor(letter.color, palette);
+      const glyph = ensureGlyph(atlas, letter.char, color, fontSize);
+      blitGlyph(ctx, atlas, glyph, x, y);
     }
   };
 
-  // Repaint only the given cells (clear + redraw), avoiding a full-grid pass.
   const redrawCells = (indices: number[]) => {
-    if (!context.current) return;
-    const ctx = context.current;
-    const { charWidth, charHeight, fontSize } = cellMetrics.current;
-    const cols = grid.current.columns;
-
-    ctx.font = `${fontSize}px monospace`;
-    ctx.textBaseline = 'top';
-
     for (let k = 0; k < indices.length; k++) {
-      const index = indices[k];
-      const letter = letters.current[index];
-      if (!letter) continue;
-      const x = (index % cols) * charWidth;
-      const y = Math.floor(index / cols) * charHeight;
-      ctx.clearRect(x, y, charWidth, charHeight);
-      ctx.fillStyle = rgbString(letter.color);
-      ctx.fillText(letter.char, x, y);
+      paintCell(indices[k]);
     }
   };
 
@@ -243,13 +343,6 @@ const LetterGlitch = ({
     const arr = transitioning.current;
     if (arr.length === 0 || !context.current) return;
 
-    const ctx = context.current;
-    const { charWidth, charHeight, fontSize } = cellMetrics.current;
-    const cols = grid.current.columns;
-
-    ctx.font = `${fontSize}px monospace`;
-    ctx.textBaseline = 'top';
-
     let write = 0;
     for (let i = 0; i < arr.length; i++) {
       const index = arr[i];
@@ -267,11 +360,7 @@ const LetterGlitch = ({
         letter.color = lerpColor(letter.startColor, letter.targetColor, letter.colorProgress);
       }
 
-      const x = (index % cols) * charWidth;
-      const y = Math.floor(index / cols) * charHeight;
-      ctx.clearRect(x, y, charWidth, charHeight);
-      ctx.fillStyle = rgbString(letter.color);
-      ctx.fillText(letter.char, x, y);
+      paintCell(index);
 
       if (keep) arr[write++] = index;
     }
@@ -301,7 +390,9 @@ const LetterGlitch = ({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    context.current = canvas.getContext('2d');
+    context.current =
+      canvas.getContext('2d', { alpha: false }) ??
+      canvas.getContext('2d');
     resizeCanvas();
 
     const start = () => {

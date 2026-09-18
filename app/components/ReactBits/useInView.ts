@@ -10,7 +10,7 @@ import { RefObject, useEffect, useRef } from "react";
 export function useVisibilityActive(
   targetRef: RefObject<HTMLElement | null>,
   onChange: (active: boolean) => void,
-  options: IntersectionObserverInit = { rootMargin: "200px" }
+  options: IntersectionObserverInit = { rootMargin: "0px" }
 ) {
   const onChangeRef = useRef(onChange);
   onChangeRef.current = onChange;

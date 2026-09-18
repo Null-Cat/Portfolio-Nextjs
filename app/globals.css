@@ -71,6 +71,34 @@ body {
 }
 
 @layer utilities {
+  /* Fade glass nodes directly; ancestor opacity disables backdrop-filter. */
+  .fade-content {
+    --fade-from: 0;
+    --fade-duration: 1000ms;
+    --fade-easing: ease-out;
+  }
+
+  .fade-content > *:not(:has([class*="backdrop-blur"])),
+  .fade-content [class*="backdrop-blur"] {
+    opacity: var(--fade-from);
+    transition:
+      opacity var(--fade-duration) var(--fade-easing),
+      filter var(--fade-duration) var(--fade-easing);
+  }
+
+  .fade-content.fade-content--in > *:not(:has([class*="backdrop-blur"])),
+  .fade-content.fade-content--in [class*="backdrop-blur"] {
+    opacity: 1;
+  }
+
+  .fade-content.fade-content--blur > * {
+    filter: blur(10px);
+  }
+
+  .fade-content.fade-content--blur.fade-content--in > * {
+    filter: blur(0);
+  }
+
   .scrollbar::-webkit-scrollbar {
     width: 5px;
     height: 5px;

@@ -1,5 +1,6 @@
 "use client";
-import { useRef, useEffect, useState, ReactNode } from "react";
+import { useRef, useEffect, useState, ReactNode, CSSProperties } from "react";
+import { cn } from "@/lib/utils";
 
 interface FadeContentProps {
   children: ReactNode;
@@ -49,12 +50,19 @@ const FadeContent: React.FC<FadeContentProps> = ({
   return (
     <div
       ref={ref}
-      className={className}
-      style={{
-        opacity: inView ? 1 : initialOpacity,
-        transition: `opacity ${duration}ms ${easing}, filter ${duration}ms ${easing}`,
-        filter: blur ? (inView ? "blur(0px)" : "blur(10px)") : "none",
-      }}
+      className={cn(
+        "fade-content",
+        inView && "fade-content--in",
+        blur && "fade-content--blur",
+        className
+      )}
+      style={
+        {
+          "--fade-from": initialOpacity,
+          "--fade-duration": `${duration}ms`,
+          "--fade-easing": easing,
+        } as CSSProperties
+      }
     >
       {children}
     </div>

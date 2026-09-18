@@ -149,31 +149,31 @@ const AboutMe = () => {
               altText="Next js Logo"
               src="/skillicons/nextjs.svg"
               text="Next.js"
-              subText="1+ Year"
+              subText="2+ Years"
             />
             <TechnologyExperience
               altText="React Logo"
               src="/skillicons/react.svg"
               text="React"
-              subText="1+ Year"
+              subText="2+ Years"
             />
             <TechnologyExperience
               altText="Node js Logo"
               src="/skillicons/nodejs.svg"
               text="Node.js"
-              subText="5+ Years"
+              subText="6+ Years"
             />
             <TechnologyExperience
               altText="Unreal Engine Logo"
               src="/skillicons/unreal.svg"
               text="Unreal Engine"
-              subText="3+ Years"
+              subText="4+ Years"
             />
             <TechnologyExperience
               altText="Unity Logo"
               src="/skillicons/unity.svg"
               text="Unity"
-              subText="2+ Years"
+              subText="3+ Years"
             />
           </FadeContent>
           <FadeContent
@@ -188,25 +188,31 @@ const AboutMe = () => {
               altText="Java Script Logo"
               src="/skillicons/js.svg"
               text="JavaScript"
-              subText="5+ Years"
+              subText="6+ Years"
             />
             <TechnologyExperience
               altText="Type Script Logo"
               src="/skillicons/ts.svg"
               text="TypeScript"
-              subText="2+ Years"
+              subText="3+ Years"
             />
             <TechnologyExperience
               altText="C Plus Plus Logo"
               src="/skillicons/cpp.svg"
               text="C++"
-              subText="3+ Years"
+              subText="4+ Years"
             />
             <TechnologyExperience
               altText="C Sharp Logo"
               src="/skillicons/cs.svg"
               text="C#"
-              subText="2+ Years"
+              subText="3+ Years"
+            />
+            <TechnologyExperience
+              altText="PHP Logo"
+              src="/skillicons/php.svg"
+              text="PHP"
+              subText="1+ Years"
             />
           </FadeContent>
           <FadeContent
@@ -313,6 +319,16 @@ const AboutMe = () => {
                   toolTipText="Heroku"
                   altText="Heroku Logo"
                   src="/skillicons/heroku.svg"
+                />
+                <OtherTechnologyExperience
+                  toolTipText="Google Cloud"
+                  altText="Google Cloud Logo"
+                  src="/skillicons/gcp.svg"
+                />
+                <OtherTechnologyExperience
+                  toolTipText="Cloudflare"
+                  altText="Cloudflare Logo"
+                  src="/skillicons/cloudflare.svg"
                 />
                 <OtherTechnologyExperience
                   toolTipText="Nginx"

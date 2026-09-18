@@ -45,7 +45,7 @@ const AboutMe = () => {
                 <Image
                   alt="Warp Design Logo"
                   className="pointer-events-auto"
-                  src="/warp.jpg"
+                  src="/WarpDesignLogo.png"
                   width={60}
                 />
                 <Divider className="h-10" orientation="vertical" />

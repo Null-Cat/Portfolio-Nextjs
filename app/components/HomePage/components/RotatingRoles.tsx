@@ -23,11 +23,11 @@ const RotatingRoles = () => {
         </motion.span>
         <RotatingText
           texts={[
-            "Frontend",
-            "Gameplay",
-            "Backend",
-            "Multiplayer",
             "Full-Stack",
+            "Frontend",
+            "Backend",
+            "Gameplay",
+            "Multiplayer",
           ]}
           mainClassName="px-2 sm:px-2 md:px-3 bg-primary overflow-hidden py-0.5 sm:py-1 md:py-2 sm:text-6xl text-4xl justify-center text-center rounded-lg"
           staggerFrom={"last"}

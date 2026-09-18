@@ -11,7 +11,7 @@ interface VisibleProjectTag {
 
 const Projects = () => {
   return (
-    <div id="Projects" className="relative w-full overflow-hidden">
+    <div id="Projects" className="relative w-full overflow-hidden bg-black">
       <div className="absolute inset-0 z-0">
         <Particles
           particleColors={["#ffffff", "#ffffff"]}

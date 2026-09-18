@@ -134,7 +134,7 @@ const Particles: React.FC<ParticlesProps> = ({
     const gl = renderer.gl;
     gl.canvas.style.display = 'block';
     container.appendChild(gl.canvas);
-    gl.clearColor(0, 0, 0, 0);
+    gl.clearColor(0, 0, 0, 1);
 
     const camera = new Camera(gl, { fov: 15 });
     camera.position.set(0, 0, cameraDistance);
@@ -310,7 +310,7 @@ const Particles: React.FC<ParticlesProps> = ({
   });
 
   return (
-    <div ref={wrapperRef} className={`absolute inset-0 overflow-hidden ${className ?? ''}`}>
+    <div ref={wrapperRef} className={`absolute inset-0 overflow-hidden bg-black ${className ?? ''}`}>
       <div ref={containerRef} className="absolute top-0 left-0 h-svh w-full" />
     </div>
   );

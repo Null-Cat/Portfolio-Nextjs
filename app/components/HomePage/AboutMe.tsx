@@ -185,6 +185,12 @@ const AboutMe = () => {
             initialOpacity={0}
           >
             <TechnologyExperience
+              altText="PHP Logo"
+              src="/skillicons/php.svg"
+              text="PHP"
+              subText="1+ Years"
+            />
+            <TechnologyExperience
               altText="Java Script Logo"
               src="/skillicons/js.svg"
               text="JavaScript"
@@ -207,12 +213,6 @@ const AboutMe = () => {
               src="/skillicons/cs.svg"
               text="C#"
               subText="3+ Years"
-            />
-            <TechnologyExperience
-              altText="PHP Logo"
-              src="/skillicons/php.svg"
-              text="PHP"
-              subText="1+ Years"
             />
           </FadeContent>
           <FadeContent
